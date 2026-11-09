@@ -2,7 +2,7 @@
 
 An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
 
-**Current state:** Chunk 03 application foundation implemented. Database and invited-editor authentication are the next chunks; no working editorial CRUD or consultation submission is claimed.
+**Current state:** Chunk 03 application foundation implemented. The local Supabase database foundation is implemented; invited-editor authentication is the next chunk; no working editorial CRUD or consultation submission is claimed.
 
 ## Read in order
 
@@ -17,6 +17,10 @@ An independent hiring-challenge submission: a considered mentoring-brand redesig
 ## Run the application
 
 Use Node 22–24 and pnpm 10.34.9. Run `pnpm install --frozen-lockfile`, then `pnpm dev`. Validate with `pnpm check`, `pnpm build`, and `pnpm test:e2e`. See [Chunk 03 verification and version decisions](docs/delivery/chunk-03.md). The `/design-system` reference is available only in development.
+
+## Local Supabase
+
+The repository requires a Docker daemon and Supabase CLI 3.0.0. Run `pnpm db:start`, `pnpm env:local`, and `pnpm db:test`; normal managed setup handles startup and pending migrations idempotently. Do not run `pnpm db:reset` unless you intend to erase the disposable local data. See [Chunk 04](docs/delivery/chunk-04.md) and [database architecture](docs/architecture/database.md). Keep hosted credentials out of chat and Git; the local helper writes only an ignored URL/publishable key.
 
 ## Preview the design study
 

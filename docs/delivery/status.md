@@ -39,7 +39,7 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 | Chunk | Work | Depends on | Current state |
 |---|---|---|---|
 | 03 | Next.js foundation, pinned versions, design tokens and actual shell | 02 | Complete; see [verification](chunk-03.md) |
-| 04 | Supabase schema, migrations, policies, storage, synthetic seeds | 03 | Not started |
+| 04 | Supabase schema, migrations, policies, storage, synthetic seeds | 03 | Complete; see [verification](chunk-04.md) |
 | 05 | Invited-editor auth and protected admin shell | 04 | Not started |
 | 06 | Shared content service and CRUD APIs | 05 | Not started |
 | 07 | Editorial dashboard and real publishing workflow | 06 | Not started |
