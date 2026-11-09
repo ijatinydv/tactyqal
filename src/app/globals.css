@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "@fontsource/newsreader/400.css";
+@import "@fontsource/newsreader/500.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+/* turn the approved visual contract into reusable application tokens */
+@theme inline {
+  --color-canvas: #f7f5ef;
+  --color-surface: #ffffff;
+  --color-surface-muted: #e9eee8;
+  --color-ink: #202620;
+  --color-muted: #596257;
+  --color-brand: #245544;
+  --color-brand-hover: #1b4235;
+  --color-border: #dedcd3;
+  --color-control-border: #778273;
+  --color-danger: #a32b24;
+  --color-accent: #c39a50;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-heading: "Newsreader", Georgia, serif;
+}
+
+/* keep the first screen calm and consistently readable without browser defaults */
+body { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); }
+
+/* make keyboard position visible on links controls and summary elements */
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 4px; }
+
+/* preserve anchored headings below the page edge without forcing scroll animation */
+[id] { scroll-margin-top: 2rem; }
+
+/* provide a consistent reading measure across the public shell */
+.page-container { width: min(100% - 3rem, 75rem); margin-inline: auto; }
+
+/* establish a simple brand identity without copying the existing logo asset */
+.wordmark { font-family: var(--font-heading); font-size: 2.125rem; line-height: 1; letter-spacing: -0.04em; }
+
+/* make the first promise readable without repeating the existing long mobile hero */
+.display-heading { font-family: var(--font-heading); font-size: clamp(2.75rem, 5.4vw, 4.75rem); line-height: 1.05; letter-spacing: -0.045em; }
+
+/* support reusable editorial hierarchy outside the hero */
+.section-heading { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.035em; }
+
+/* distinguish concise context from body copy without a promotional banner */
+.eyebrow { color: var(--color-brand); font-size: 0.75rem; line-height: 1.5; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* honour motion preferences before individual components add transitions */
+@media (prefers-reduced-motion: reduce) {
+  /* prevent decorative movement from becoming a barrier to interaction */
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

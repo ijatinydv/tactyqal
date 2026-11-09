@@ -1,6 +1,6 @@
 # Delivery status
 
-Updated 2026-11-09. Scope of this delivery: finalise repository structure, then complete Phase 1 Chunks 01 and 02 in sequence. Do not interpret later acceptance checklists as passing implementation tests.
+Updated 2026-11-09. Phase 1 is complete; Phase 2 implementation is underway. Do not interpret later acceptance checklists as passing implementation tests.
 
 ## Completed in order
 
@@ -32,13 +32,13 @@ Chromium desktop 1440 × 1000 and mobile 390 × 844 inspection; source text and 
 - Final handoff checks passed: 28 local Markdown references, HTML fragment/stylesheet references, ignored local/secret paths, and diff whitespace.
 - Independent read-only architecture/document review returned no material must-fix issues.
 
-No application build, unit tests, API integration tests, RLS tests, or deployed performance checks ran: no application/database has been implemented in Phase 1.
+At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds application lint, type, unit, build and browser checks; later sections track the implemented chunks.
 
 ## Next chunks and dependencies
 
 | Chunk | Work | Depends on | Current state |
 |---|---|---|---|
-| 03 | Next.js foundation, pinned versions, design tokens and actual shell | 02 | Next; not started |
+| 03 | Next.js foundation, pinned versions, design tokens and actual shell | 02 | Complete; see [verification](chunk-03.md) |
 | 04 | Supabase schema, migrations, policies, storage, synthetic seeds | 03 | Not started |
 | 05 | Invited-editor auth and protected admin shell | 04 | Not started |
 | 06 | Shared content service and CRUD APIs | 05 | Not started |

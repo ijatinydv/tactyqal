@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "setup": {
+      "command": "bash scripts/setup.sh",
+      "enabled": true
+    },
+    "run": {
+      "command": "bash scripts/preview.sh",
+      "enabled": true
+    }
+  },
+  "ports": {
+    "preview": 3000
+  }
+}

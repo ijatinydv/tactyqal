@@ -2,7 +2,7 @@
 
 An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
 
-**Current state:** Phase 1 planning and design only. No Next.js application, database, authentication, deployment, or working CRUD is implemented yet. The HTML design board is an illustrative specification, not a functional product.
+**Current state:** Chunk 03 application foundation implemented. Database and invited-editor authentication are the next chunks; no working editorial CRUD or consultation submission is claimed.
 
 ## Read in order
 
@@ -14,13 +14,17 @@ An independent hiring-challenge submission: a considered mentoring-brand redesig
 6. [Visual design board](docs/design/boards/index.html)
 7. [Delivery status and remaining decisions](docs/delivery/status.md)
 
+## Run the application
+
+Use Node 22–24 and pnpm 10.34.9. Run `pnpm install --frozen-lockfile`, then `pnpm dev`. Validate with `pnpm check`, `pnpm build`, and `pnpm test:e2e`. See [Chunk 03 verification and version decisions](docs/delivery/chunk-03.md). The `/design-system` reference is available only in development.
+
 ## Preview the design study
 
 Open `docs/design/boards/index.html` in a browser. Alternatively, run `python3 -m http.server 8000 --bind 127.0.0.1` from the repository root and visit `http://localhost:8000/docs/design/boards/`. Do not expose this root-directory server publicly. The study has no application dependencies or backend; its static controls are explicitly labelled as specimens. Google Fonts are optional presentation resources, with local fallbacks if unavailable.
 
 ## Technical direction
 
-One Next.js App Router / TypeScript application, feature-based modules, Tailwind and selectively customised shadcn/ui, Supabase PostgreSQL/Auth/Storage, and Vercel deployment. Domain services are shared by server-rendered pages and documented Route Handlers. Database policies protect data independently of page navigation. Versions and package tooling will be pinned in Chunk 03, not guessed in a planning-only phase.
+One Next.js App Router / TypeScript application, feature-based modules, Tailwind and selectively customised shadcn/ui, Supabase PostgreSQL/Auth/Storage, and Vercel deployment. Domain services are shared by server-rendered pages and documented Route Handlers. Database policies protect data independently of page navigation. Versions and package tooling are pinned in package.json and pnpm-lock.yaml.
 
 ## Content and evidence
 
