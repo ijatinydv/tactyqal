@@ -1,6 +1,6 @@
 # Delivery status
 
-Updated 2026-11-09. Phase 1 is complete; Phase 2 implementation is underway. Do not interpret later acceptance checklists as passing implementation tests.
+Updated 2026-11-09. Phase 1 and Phase 2 Chunks 03–05 are complete. Do not interpret later acceptance checklists as passing implementation tests.
 
 ## Completed in order
 
@@ -40,7 +40,7 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 |---|---|---|---|
 | 03 | Next.js foundation, pinned versions, design tokens and actual shell | 02 | Complete; see [verification](chunk-03.md) |
 | 04 | Supabase schema, migrations, policies, storage, synthetic seeds | 03 | Complete; see [verification](chunk-04.md) |
-| 05 | Invited-editor auth and protected admin shell | 04 | Not started |
+| 05 | Invited-editor auth and protected admin shell | 04 | Complete; see [verification](chunk-05.md) |
 | 06 | Shared content service and CRUD APIs | 05 | Not started |
 | 07 | Editorial dashboard and real publishing workflow | 06 | Not started |
 | 08 | Database-backed Journal/article pages | 07 | Not started |
@@ -58,8 +58,16 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 - No production calendar authority: isolated demo requests, not bookings into the real business calendar.
 - No user analytics/interviews: audience/funnel recommendations remain reasoned hypotheses.
 - No hosted Supabase settings are required for this phase. Add public URL/publishable key through project environment settings before hosted integration; never paste database passwords or secret keys in chat. Browser API keys do not authorise migrations.
-- Repository is connected to `ijatinydv/tactyqal`; this delivery has not pushed commits, created a PR, or deployed a live application.
+- Repository is connected to `ijatinydv/tactyqal`; local chunk commits are created separately. No push, PR, merge, or hosted production deployment has been performed; the managed local Preview is available.
+
+## Phase 2 handoff
+
+- Chunk 03: `13655e4` responsive Next.js foundation.
+- Chunk 04: `202df48` database/schema/policies/seeds, including nonblank-text regression hardening.
+- Chunk 05: separate invited-editor auth commit in this delivery; see Git history for its final hash.
+- Verification: `pnpm check`, `pnpm build`, `pnpm db:test` (78 assertions), and `pnpm test:e2e` (7 real browser tests) pass. Local managed setup is idempotent and the Preview uses production mode to avoid the observed dev/HMR failure.
+- Auth credentials remain in ignored local state. No hosted secrets are needed for local verification; hosted configuration and safe reviewer access belong to the deployment chunk.
 
 ## Immediate implementation instruction
 
-Proceed with Chunk 03 only when moving to Phase 2: read the architecture, audit, product brief, design contract and screen checklist; inspect repository instructions; scaffold a single compatible Next.js app; translate tokens and public/admin shells faithfully; set up lint/type/test commands; verify the real shell in a browser. Do not create an unrelated template or silently substitute static content for later database features.
+Proceed with Chunk 06: preserve the approved feature boundaries and implement persisted, authorised editorial services/APIs against this schema. Use the editor session and RLS, share services between Route Handlers and server-rendered pages, and add an atomic post/category operation with appropriate tests. Do not imply the protected shell already includes the content editor or inquiry workflow.
