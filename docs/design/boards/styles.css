@@ -1,0 +1,415 @@
+/* preserve the approved palette across every screen specimen */
+:root {
+  --canvas: #f7f5ef;
+  --surface: #fff;
+  --sage: #e9eee8;
+  --ink: #202620;
+  --muted: #596257;
+  --brand: #245544;
+  --border: #dedcd3;
+  --control-border: #778273;
+  --ochre: #c39a50;
+}
+
+/* keep component sizing predictable at narrow viewport widths */
+* { box-sizing: border-box; }
+
+/* make the design study readable without requiring remote fonts */
+body {
+  margin: 0;
+  background: #eae8e1;
+  color: var(--ink);
+  font: 15px/1.65 "Manrope", system-ui, sans-serif;
+}
+
+/* reserve expressive type for the editorial hierarchy */
+h1, h2, h3, h4, p { margin: 0; }
+
+/* make document navigation identifiable without relying on colour alone */
+a { color: var(--brand); text-underline-offset: 4px; }
+
+/* keep keyboard navigation visible on the actual study links */
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+
+/* constrain large screens while leaving room for quiet margins */
+.wrap { max-width: 1328px; margin: 0 auto; padding: 0 48px; }
+
+/* distinguish the specification from an official functional website */
+.study-header { padding: 24px 0; border-bottom: 1px solid #c4c4b8; }
+
+/* keep the artifact title understated beside the work itself */
+.study-header h1 { font-size: 18px; font-weight: 700; }
+
+/* make the prototype status impossible to mistake for a live product */
+.study-header p { font-size: 13px; color: var(--muted); max-width: 850px; margin-top: 4px; }
+
+/* let reviewers jump directly to the screen they want to inspect */
+.study-nav { display: flex; gap: 12px 24px; flex-wrap: wrap; margin-top: 12px; font-size: 13px; }
+
+/* separate each screen study without decorative chrome */
+.study-section { margin-top: 48px; scroll-margin-top: 24px; }
+
+/* keep section labels outside the product composition */
+.board-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+
+/* present a coherent canvas for each proposed screen */
+.frame { background: var(--canvas); border: 1px solid #d3d3c8; border-radius: 12px; overflow: hidden; }
+
+/* preserve consistent inner alignment between public sections */
+.inner { padding-left: 48px; padding-right: 48px; }
+
+/* make the public shell calm enough for both marketing and reading */
+.site-header { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--border); }
+
+/* establish a typographic identity without copying an unlicensed logo */
+.wordmark { font: 500 32px/1 "Newsreader", Georgia, serif; letter-spacing: -0.04em; white-space: nowrap; }
+
+/* retain the company descriptor without competing with the wordmark */
+.wordmark small { font: 11px "Manrope", sans-serif; letter-spacing: 0.02em; margin-left: 7px; color: var(--muted); }
+
+/* keep public destinations legible instead of compressing nine links */
+.nav-specimen { display: flex; align-items: center; gap: 26px; font-size: 13px; }
+
+/* reserve mobile navigation space without pretending the study is an app */
+.mobile-menu { display: none; font-size: 13px; border: 1px solid var(--control-border); padding: 7px 12px; border-radius: 8px; }
+
+/* make action hierarchy visible while keeping specimens noninteractive */
+.control { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 46px; padding: 11px 17px; border-radius: 8px; background: var(--brand); color: white; font-size: 14px; font-weight: 600; text-align: center; }
+
+/* distinguish secondary actions without adding another dominant colour */
+.control.secondary { color: var(--brand); background: transparent; border: 1px solid var(--control-border); }
+
+/* give primary copy priority over the illustrative product */
+.hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; padding-top: 80px; padding-bottom: 64px; align-items: center; }
+
+/* make supporting labels useful rather than loud promotional banners */
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--brand); text-transform: uppercase; }
+
+/* express the editorial character without decorative gradients */
+.display { font: 400 clamp(44px, 5.2vw, 72px)/1.04 "Newsreader", Georgia, serif; letter-spacing: -0.045em; margin-top: 20px; }
+
+/* make the promise easy to scan before asking for an action */
+.intro { font-size: 16px; color: var(--muted); line-height: 1.75; max-width: 480px; margin-top: 24px; }
+
+/* keep the primary action and low commitment alternative together */
+.actions { display: flex; gap: 16px 20px; align-items: center; flex-wrap: wrap; margin-top: 28px; }
+
+/* preserve a quiet alternative to the primary consultation action */
+.text-specimen { color: var(--brand); font-size: 14px; font-weight: 600; }
+
+/* distinguish format facts from unsubstantiated success metrics */
+.format-facts { color: var(--muted); font-size: 13px; margin-top: 24px; }
+
+/* ensure the original project illustration cannot become a claimed student result */
+.project-art { padding: 26px; background: var(--sage); border-radius: 8px; min-width: 0; }
+
+/* label illustrative provenance near the visual evidence itself */
+.art-label { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; color: var(--muted); margin-bottom: 22px; }
+
+/* make the project concept tangible without copying student screenshots */
+.app-illustration { background: #fcfbf7; border: 1px solid #d2d8cc; padding: 24px; border-radius: 6px; }
+
+/* give the illustrative project its own modest product identity */
+.app-bar { font-size: 11px; display: flex; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+
+/* suggest a simple useful product instead of a fabricated analytics dashboard */
+.app-title { font: 400 42px/1.05 "Newsreader", Georgia, serif; letter-spacing: -0.035em; max-width: 260px; margin: 26px 0 12px; }
+
+/* explain the illustrative problem without invented users or outcomes */
+.app-copy { color: var(--muted); font-size: 11px; max-width: 260px; }
+
+/* use a small original illustration instead of a generic stock photograph */
+.books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 24px; align-items: end; }
+
+/* give the book concept a tactile editorial reference */
+.book { height: 126px; padding: 15px 11px; background: #d7bb8c; color: #303b2f; border-left: 5px solid #bea273; font: 500 19px/1.05 "Newsreader", Georgia, serif; }
+
+/* differentiate the illustration through paper colours rather than effects */
+.book:nth-child(2) { background: #345a48; color: #fff; border-color: #294638; height: 142px; }
+
+/* keep the third cover visually subordinate to the central book */
+.book:nth-child(3) { background: #dbdcd1; border-color: #babfaf; height: 116px; }
+
+/* reinforce the program process beside the project concept */
+.art-caption { font-size: 10px; color: var(--brand); margin-top: 18px; display: flex; justify-content: space-between; gap: 12px; }
+
+/* separate information by rhythm rather than nested card borders */
+.content-section { border-top: 1px solid var(--border); padding-top: 56px; padding-bottom: 56px; }
+
+/* pair a strong section title with useful supporting information */
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+
+/* reuse editorial hierarchy across program and resource sections */
+.section-title { font: 400 44px/1.08 "Newsreader", Georgia, serif; letter-spacing: -0.035em; max-width: 620px; margin-top: 12px; }
+
+/* give each learning stage equal prominence without a decorative timeline */
+.journey { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+
+/* orient the reader before presenting weekly deliverables */
+.stage-number { font: 400 32px "Newsreader", Georgia, serif; color: var(--brand); }
+
+/* make the proposed activity clearer than the week label alone */
+.stage h4 { font-size: 14px; font-weight: 700; margin-top: 12px; }
+
+/* keep curriculum explanations readable within a compact sequence */
+.stage p { font-size: 15px; color: var(--muted); margin-top: 8px; }
+
+/* treat illustrative content provenance as essential reading */
+.note { font-size: 13px; color: var(--muted); margin-top: 20px; }
+
+/* provide meaningful browsing rather than a carousel of tiny screenshots */
+.story-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+
+/* create a quiet place for a project explanation */
+.story { border-top: 1px solid var(--control-border); padding-top: 24px; }
+
+/* give project names an identity independent of unverifiable metrics */
+.story h4 { font: 400 32px "Newsreader", Georgia, serif; margin-top: 8px; }
+
+/* make problem and approach scannable without pretending outcomes are verified */
+.story p { font-size: 16px; color: var(--muted); max-width: 440px; margin-top: 8px; }
+
+/* keep resources integrated with the mentoring brand */
+.journal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+
+/* establish a resource card without a heavy floating container */
+.post-card { border-top: 1px solid var(--control-border); padding-top: 20px; }
+
+/* make original demo article titles the focus of resource browsing */
+.post-card h4 { font: 400 29px/1.15 "Newsreader", Georgia, serif; letter-spacing: -0.025em; margin: 16px 0 10px; }
+
+/* avoid noisy metadata while preserving content orientation */
+.meta { font-size: 13px; color: var(--muted); }
+
+/* keep excerpts useful without competing with article headlines */
+.post-card p { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+
+/* make the final next step feel like an invitation rather than a sales banner */
+.invitation { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--sage); padding-top: 40px; padding-bottom: 40px; }
+
+/* keep legal context visible at the end of public screens */
+.site-footer { padding-top: 24px; padding-bottom: 24px; display: flex; gap: 24px; justify-content: space-between; color: var(--muted); font-size: 11px; border-top: 1px solid var(--border); }
+
+/* centre article reading without stretching paragraphs across the frame */
+.article { max-width: 760px; padding: 64px 32px; margin: 0 auto; }
+
+/* give resource headlines the same voice as the mentoring homepage */
+.article-title { font: 400 64px/1.04 "Newsreader", Georgia, serif; letter-spacing: -0.04em; margin: 20px 0; }
+
+/* separate the article promise from the reading body */
+.article-deck { font-size: 18px; color: var(--muted); margin-bottom: 24px; }
+
+/* support sustained reading with generous line height */
+.prose { font-size: 18px; line-height: 1.85; }
+
+/* let article sections breathe without oversized empty surfaces */
+.prose p { margin: 22px 0; }
+
+/* keep subheadings distinct from both metadata and body text */
+.prose h4 { font: 400 32px/1.2 "Newsreader", Georgia, serif; margin-top: 32px; }
+
+/* make a practical takeaway memorable without a decorative quote carousel */
+.takeaway { border-left: 3px solid var(--brand); padding: 16px 24px; background: var(--sage); margin-top: 32px; font-size: 16px; }
+
+/* model a real search region without pretending it queries a backend */
+.filter-specimens { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 36px; }
+
+/* demonstrate field boundaries strong enough to survive low contrast displays */
+.field-specimen { border: 1px solid var(--control-border); border-radius: 8px; min-height: 46px; padding: 12px 14px; background: var(--surface); font-size: 13px; color: var(--muted); }
+
+/* keep the dashboard a focused workspace instead of a second brand */
+.workspace { display: grid; grid-template-columns: 200px minmax(0, 1fr); background: #fff; }
+
+/* distinguish administrative navigation from document content */
+.admin-nav { background: var(--canvas); padding: 30px 24px; border-right: 1px solid var(--border); }
+
+/* keep editor destinations readable without decorative icon dependence */
+.admin-nav ul { list-style: none; padding: 0; margin: 36px 0 0; font-size: 13px; }
+
+/* create comfortable scanning space for editorial destinations */
+.admin-nav li { padding: 10px 0; color: var(--muted); }
+
+/* make the current editorial section identifiable through weight and text */
+.admin-nav .active { color: var(--brand); font-weight: 700; }
+
+/* leave enough editing space while preserving small screen reflow */
+.editor { padding: 32px; min-width: 0; }
+
+/* keep status and actions discoverable at the top of the workspace */
+.editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; }
+
+/* prevent editorial tools from inheriting oversized marketing typography */
+.editor-heading h3 { font-size: 21px; font-weight: 600; }
+
+/* keep content writing primary and publication settings secondary */
+.editor-columns { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 28px; }
+
+/* pair visible field labels with examples rather than placeholder only forms */
+.field-label { font-size: 12px; font-weight: 600; display: block; margin: 18px 0 7px; }
+
+/* demonstrate editorial text entry without building a fake functional editor */
+.editor-body { min-height: 220px; border: 1px solid var(--control-border); border-radius: 8px; padding: 20px; }
+
+/* make rich text controls compact enough to remain secondary to the writing */
+.toolbar { border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 20px; font-size: 12px; word-spacing: 12px; }
+
+/* gather publication controls without hiding important safety information */
+.publish-panel { background: var(--canvas); padding: 20px; border: 1px solid var(--border); border-radius: 8px; }
+
+/* make draft status clear without relying solely on a coloured dot */
+.status { display: inline-block; border: 1px solid var(--control-border); border-radius: 5px; padding: 4px 8px; font-size: 11px; color: var(--brand); }
+
+/* retain the distinction between an illustration and a functioning admin */
+.specimen-notice { background: var(--sage); padding: 12px 20px; font-size: 11px; color: var(--brand); border-bottom: 1px solid var(--border); }
+
+/* give adult contact context room beside the minimal request form */
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; padding-top: 64px; padding-bottom: 64px; }
+
+/* make privacy expectations readable rather than burying them in legal text */
+.contact-context { color: var(--muted); font-size: 14px; margin-top: 24px; max-width: 420px; }
+
+/* keep optional message space consistent with other form boundaries */
+.message-specimen { min-height: 110px; }
+
+/* describe safe data collection before the user reaches the submit action */
+.privacy-note { font-size: 12px; color: var(--muted); margin: 20px 0; }
+
+/* make practical questions easy to scan without a separate sales surface */
+.faq-specimen { border-top: 1px solid var(--border); padding: 18px 0; }
+
+/* keep the disclosure specimen usable with native keyboard interaction */
+.faq-specimen summary { cursor: pointer; font-size: 16px; font-weight: 600; }
+
+/* separate the expanded explanation from its question */
+.faq-specimen p { font-size: 16px; color: var(--muted); margin-top: 16px; max-width: 760px; }
+
+/* preserve a compact reference for colour and typography decisions */
+.token-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 32px; }
+
+/* make colour roles identifiable in plain language */
+.swatch { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: white; font-size: 12px; }
+
+/* give reviewers enough colour area to judge the restrained palette */
+.swatch-colour { height: 72px; }
+
+/* keep implementation values beside their human readable roles */
+.swatch p { padding: 12px; }
+
+/* keep the artifact ending clear and separate from proposed product content */
+.study-footer { font-size: 12px; color: var(--muted); padding: 32px 0 48px; }
+
+/* adapt hierarchy before desktop columns become too narrow */
+@media (max-width: 1100px) {
+  /* prioritise the work over outer presentation margins */
+  .wrap { padding: 0 32px; }
+  /* keep public sections aligned as their available space shrinks */
+  .inner { padding-left: 32px; padding-right: 32px; }
+  /* simplify navigation instead of squeezing labels into tiny targets */
+  .nav-specimen { gap: 16px; }
+  /* let the primary offer retain room beside its project */
+  .hero { gap: 28px; padding-top: 56px; }
+  /* keep visual illustration text proportional to its container */
+  .app-title { font-size: 34px; }
+  /* avoid excessive administration chrome on smaller laptops */
+  .workspace { grid-template-columns: 160px minmax(0, 1fr); }
+  /* move settings beneath writing when both columns cannot stay legible */
+  .editor-columns { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* preserve the project composition when tablet columns would make it unreadable */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* keep the offer and its illustration readable instead of squeezing both */
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  /* retain the editorial scale while the hero gains a single reading column */
+  .display { font-size: 64px; max-width: 720px; }
+  /* keep the illustration intentional rather than stretching a tiny product preview */
+  .project-art { max-width: 560px; width: 100%; }
+  /* favour clear menu access over crowded desktop destinations */
+  .nav-specimen { display: none; }
+  /* expose the planned compact navigation treatment on tablets */
+  .mobile-menu { display: block; }
+  /* give each proposed learning stage enough room for useful explanations */
+  .journey, .journal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* preserve reading order and action priority on phones and small tablets */
+@media (max-width: 767px) {
+  /* keep small screens spacious without sacrificing usable content width */
+  .wrap { padding: 0 20px; }
+  /* reduce repeated section gutters inside the narrow board frame */
+  .inner { padding-left: 20px; padding-right: 20px; }
+  /* make the research status concise enough not to dominate the mobile hero */
+  .study-header { padding: 18px 0; }
+  /* leave generous separation between standalone screen specimens */
+  .study-section { margin-top: 32px; }
+  /* keep public navigation compact above the primary offer */
+  .site-header { min-height: 68px; gap: 12px; }
+  /* keep a recognisable brand without crowding the mobile menu label */
+  .wordmark { font-size: 29px; }
+  /* replace dense destination labels with the specified menu treatment */
+  .nav-specimen { display: none; }
+  /* show the navigation specimen without faking a working application menu */
+  .mobile-menu { display: block; }
+  /* ensure the consultation action comes before the project on mobile */
+  .hero { grid-template-columns: minmax(0, 1fr); padding-top: 36px; padding-bottom: 36px; gap: 32px; }
+  /* maintain headline distinction without recreating the existing long mobile hero */
+  .display { font-size: 46px; margin-top: 16px; }
+  /* make supporting text comfortable on narrow lines */
+  .intro { font-size: 15px; margin-top: 18px; }
+  /* stack alternatives without stretching the primary action outside its container */
+  .actions { gap: 16px; margin-top: 22px; }
+  /* ensure long action labels fit the smallest supported board width */
+  .control { font-size: 14px; padding: 11px 13px; }
+  /* keep factual orientation close to the primary action */
+  .format-facts { font-size: 13px; margin-top: 18px; }
+  /* preserve the project composition without excess nested padding */
+  .project-art { padding: 18px; }
+  /* leave useful room for the original book illustration */
+  .app-illustration { padding: 18px; }
+  /* keep the illustrative project headline readable above its covers */
+  .app-title { font-size: 36px; }
+  /* preserve meaningful cover shapes on narrow mobile layouts */
+  .book { padding: 12px 6px; font-size: 16px; border-left-width: 3px; }
+  /* use a vertical learning sequence instead of horizontal scrolling cards */
+  .journey { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  /* give each proposed stage a compact readable starting point */
+  .stage { border-top: 1px solid var(--border); padding-top: 16px; }
+  /* prioritise section meaning over decorative title scale */
+  .section-title { font-size: 34px; }
+  /* keep section links beside their titles only when there is room */
+  .section-heading { display: block; }
+  /* make project and resource stories readable in their natural order */
+  .story-grid, .journal-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  /* avoid excessive mobile whitespace between useful sections */
+  .content-section { padding-top: 36px; padding-bottom: 36px; }
+  /* keep the final request action inside the reading flow */
+  .invitation { display: block; padding-top: 32px; padding-bottom: 32px; }
+  /* separate the final action from its invitation copy */
+  .invitation .control { margin-top: 24px; }
+  /* prevent footer legal text from collapsing into narrow columns */
+  .site-footer { display: block; }
+  /* make the independent demo disclaimer readable after the brand line */
+  .site-footer span { display: block; margin-top: 8px; }
+  /* preserve a comfortable mobile article measure */
+  .article { padding: 36px 20px; }
+  /* keep long article headlines from dominating the opening screen */
+  .article-title { font-size: 44px; }
+  /* retain readable article support on small screens */
+  .article-deck, .prose { font-size: 17px; }
+  /* replace the editor sidebar with a compact navigation row */
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+  /* avoid wasting vertical space on desktop administration chrome */
+  .admin-nav { padding: 20px; border-right: 0; border-bottom: 1px solid var(--border); }
+  /* keep all editor destinations reachable in the narrow specimen */
+  .admin-nav ul { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  /* preserve reading order for editor status and actions */
+  .editor { padding: 20px; }
+  /* let writing context and action specimens wrap without overflowing */
+  .editor-heading { flex-wrap: wrap; margin-bottom: 20px; }
+  /* reduce panel padding while retaining visible grouping */
+  .publish-panel { padding: 16px; }
+  /* put contact context before fields rather than hiding it in a sidebar */
+  .contact-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 36px; padding-bottom: 36px; }
+  /* make token references legible on phones */
+  .token-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 20px; }
+}

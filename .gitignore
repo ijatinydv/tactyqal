@@ -1,0 +1,24 @@
+# keep local agent state and audit scratch files out of the submission
+.hoplite/
+.context/
+
+# keep credentials and local environment overrides private
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# keep installed dependencies and generated outputs reproducible rather than committed
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+.vercel/
+.supabase/
+supabase/.temp/
+supabase/.branches/
+*.tsbuildinfo
+.DS_Store
