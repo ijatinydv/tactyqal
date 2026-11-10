@@ -1,6 +1,6 @@
 # Delivery status
 
-Updated 2026-11-09. Phase 1 and Phase 2 Chunks 03–05 are complete. Do not interpret later acceptance checklists as passing implementation tests.
+Updated 2026-11-10. Phases 1–3 are complete through Chunk 08. Do not interpret later acceptance checklists as passing implementation tests.
 
 ## Completed in order
 
@@ -41,9 +41,9 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 | 03 | Next.js foundation, pinned versions, design tokens and actual shell | 02 | Complete; see [verification](chunk-03.md) |
 | 04 | Supabase schema, migrations, policies, storage, synthetic seeds | 03 | Complete; see [verification](chunk-04.md) |
 | 05 | Invited-editor auth and protected admin shell | 04 | Complete; see [verification](chunk-05.md) |
-| 06 | Shared content service and CRUD APIs | 05 | Not started |
-| 07 | Editorial dashboard and real publishing workflow | 06 | Not started |
-| 08 | Database-backed Journal/article pages | 07 | Not started |
+| 06 | Shared content service and CRUD APIs | 05 | Complete; see [verification](chunk-06.md) |
+| 07 | Editorial dashboard and real publishing workflow | 06 | Complete; see [verification](chunk-07.md) |
+| 08 | Database-backed Journal/article pages | 07 | Complete; see [verification](chunk-08.md) |
 | 09 | Homepage and project storytelling | 08 | Not started |
 | 10 | Consultation request and private inbox | 09 + database/auth | Not started |
 | 11 | Synthetic WordPress import proof of concept | 08; after core flow | Optional, not started |
@@ -58,7 +58,7 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 - No production calendar authority: isolated demo requests, not bookings into the real business calendar.
 - No user analytics/interviews: audience/funnel recommendations remain reasoned hypotheses.
 - No hosted Supabase settings are required for this phase. Add public URL/publishable key through project environment settings before hosted integration; never paste database passwords or secret keys in chat. Browser API keys do not authorise migrations.
-- Repository is connected to `ijatinydv/tactyqal`; local chunk commits are created separately. No push, PR, merge, or hosted production deployment has been performed; the managed local Preview is available.
+- Repository is connected to `ijatinydv/tactyqal`; `main` contains the Phase 2 baseline. Phase 3 commits are reviewed separately through the feature branch and PR; no merge or hosted production deployment is implied. The managed local Preview is available.
 
 ## Phase 2 handoff
 
@@ -68,6 +68,23 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 - Verification: `pnpm check`, `pnpm build`, `pnpm db:test` (78 assertions), and `pnpm test:e2e` (7 real browser tests) pass. Local managed setup is idempotent and the Preview uses production mode to avoid the observed dev/HMR failure.
 - Auth credentials remain in ignored local state. No hosted secrets are needed for local verification; hosted configuration and safe reviewer access belong to the deployment chunk.
 
+## Phase 3 handoff
+
+Three separate implementation commits preserve the API, editorial/media, and public-Journal work. Commit messages describe the actual changes without phase/chunk numbering. The Phase 3 PR targets `main`, which already contains the Phase 2 baseline.
+
+Verification against the real disposable local stack:
+
+- `pnpm check`: lint, strict type checks, and 13 unit/component tests pass.
+- `pnpm db:test`: 100 pgTAP assertions pass, including atomic rollback, role boundaries, draft privacy and Storage preflight regression coverage.
+- `pnpm test:integration`: persisted HTTP CRUD passes with no skipped test; ephemeral credentials remain only in operational process memory.
+- `pnpm test:e2e`: all 14 browser tests pass, covering public navigation, actual viewer API denial, Auth lifecycle, safe refresh/expiry, Journal search/categories/pagination, metadata, media validation, complete publishing, failed-save recovery and unsaved-navigation checks.
+- Production build and managed Preview are verified. The existing development-HMR limitation remains; the Preview uses `next build`/`next start` and does not claim working sandbox HMR.
+- Fresh desktop/mobile screenshots and live interaction checks are inspected. Only original demo data is used; uploaded evidence contains no credentials or real inquiries.
+
+An independent review identified incompatible heading node representations during integration. The canonical heading representation is now used by both editor and reader and has a regression test. Actual Storage API testing identified `contentLength` preflight metadata versus final `size`; an additive migration supports both while keeping MIME/size/folder/role restrictions. A mutation-origin check now accounts for trusted hosting proxy headers rather than Next's internal listener address.
+
+Limitations: no consultation collection, real business calendar integration, production hosting, WordPress migration, or automatic orphan-media cleanup. Demo pages remain noindexed. Article slug changes return 404 at the old address until a verified redirect map is introduced. Public requests fetch current published data; cover assets use immutable generated paths.
+
 ## Immediate implementation instruction
 
-Proceed with Chunk 06: preserve the approved feature boundaries and implement persisted, authorised editorial services/APIs against this schema. Use the editor session and RLS, share services between Route Handlers and server-rendered pages, and add an atomic post/category operation with appropriate tests. Do not imply the protected shell already includes the content editor or inquiry workflow.
+Proceed to Phase 4 only when requested: complete homepage/project storytelling, then implement minimal consultation requests and the private inbox. Preserve the functioning publication services, permissions and browser tests. Do not fabricate business claims or imply the Inquiries shell already collects customer data. PR creation does not authorise merging.

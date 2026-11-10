@@ -2,7 +2,7 @@
 
 An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
 
-**Current state:** Phase 2 Chunks 03–05 implemented: responsive application foundation, real local Supabase schema/policies, and verified editor authentication/protected workspace. Blog CRUD, content editing, public feed, and inquiry submission are later chunks—not simulated here.
+**Current state:** Phase 3 is implemented: database-backed blog CRUD, a protected structured editor with real cover uploads, private saved previews, publication lifecycle, public Journal/article pages, and live homepage resources. Consultation requests and the full marketing-homepage rollout remain later phases—not simulated here.
 
 ## Read in order
 
@@ -26,7 +26,13 @@ The repository requires a Docker daemon and Supabase CLI 3.0.0. Run `pnpm db:sta
 
 Run `pnpm editor:local` to create a disposable confirmed local editor. The helper stores generated credentials in ignored `.hoplite/runtime/local-editor.json` and never prints the password. Never publish that file. See [authentication boundaries](docs/architecture/authentication.md) and [Chunk 05 evidence](docs/delivery/chunk-05.md).
 
-`pnpm test:e2e` runs both public-shell and real local Auth browser tests. The test helpers create temporary accounts and remove them afterwards. Use the isolated local stack, not a customer environment. Managed Preview builds and runs the production app; development HMR was unreliable in this sandbox, so production interaction checks are the evidence of working behavior.
+`pnpm test:e2e` runs public, real Auth, API-access, media, and end-to-end publishing browser tests. `pnpm test:integration` creates an isolated local editor for the persisted HTTP CRUD suite. The test helpers create temporary accounts and remove them afterwards. Use the isolated local stack, not a customer environment. Managed Preview builds and runs the production app; development HMR was unreliable in this sandbox, so production interaction checks are the evidence of working behavior.
+
+## Editorial workflow
+
+Sign in → Posts → New post → add title/slug/excerpt and article blocks → select categories → optionally upload a cover and provide alt text → Save draft → Preview saved version → Publish. Published articles appear on `/blog` and the homepage. Saving published changes updates the public article; unpublishing and deleting remove public access. Draft preview requires editor authentication.
+
+Uploads are decoded and re-encoded to WebP before storage; covers are intentionally public even when an article is a draft. The server enforces authorisation and RLS independently of the UI. See [API contract](docs/architecture/blog-api.md), [editor/media](docs/delivery/chunk-07.md), and [public Journal](docs/delivery/chunk-08.md). The block editor preserves untouched formatting and explicitly warns before flattening an edited formatted block; it is not a general HTML editor.
 
 ## Preview the design study
 
@@ -42,4 +48,4 @@ The [audit](docs/research/brand-ux-audit.md) records public sources, observation
 
 ## Verification at this phase
 
-Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 2 additionally passes lint/type/component/build checks, 78 database assertions, and seven real browser tests. CRUD APIs and publishing remain unimplemented until Chunk 06/07.
+Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 3 verification includes lint/type/build checks, 13 unit/component tests, 100 database assertions, persisted HTTP CRUD, and the real browser suites. See [current delivery status](docs/delivery/status.md) for exact results and limits.

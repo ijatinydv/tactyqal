@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-// prove the real public shell presents the approved offer and honest unfinished destinations
+// prove the public shell connects the program offer to the implemented journal archive
  test("public navigation and resource status", async ({ page }) => {
   await page.goto("/");
   await page.waitForLoadState("networkidle");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Build what comes next");
   await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link", { name: "Journal" }).click();
-  await expect(page.getByRole("status")).toContainText("Chunk 08");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Ideas, tested");
+  await expect(page.getByRole("link", { name: "Start With One Useful Question", exact: true })).toBeVisible();
 });
 
 // protect keyboard navigation and initial action placement on the narrow public shell
