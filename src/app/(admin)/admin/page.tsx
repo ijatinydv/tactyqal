@@ -1,7 +1,9 @@
 import { ConfigurationNotice } from "@/features/auth/components/configuration-notice";
 import { requireEditor } from "@/features/auth/server";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-// show an honest empty workspace until database-backed editorial summaries exist
+// show honest next steps without inventing workspace metrics
 export default async function AdminOverviewPage() {
   const editor = await requireEditor();
   if (!editor) return <ConfigurationNotice />;
@@ -11,8 +13,20 @@ export default async function AdminOverviewPage() {
       <p className="text-sm font-semibold uppercase tracking-[0.12em] text-brand">Editorial</p>
       <h1 id="overview-heading" className="section-heading mt-3">Overview</h1>
       <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
-        Your editorial workspace is ready. Published content and activity summaries will appear when the editorial workflow is connected; no placeholder counts are shown.
+        Manage saved articles from this private workspace. Consultation requests will be connected in a later phase.
       </p>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <section className="rounded-xl border border-border bg-white p-5">
+          <h2 className="font-heading text-2xl">Posts</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">Create drafts, edit articles, and publish updates to the Journal.</p>
+          <Button asChild variant="secondary" className="mt-4"><Link href="/admin/posts">Manage posts</Link></Button>
+        </section>
+        <section className="rounded-xl border border-border bg-white p-5">
+          <h2 className="font-heading text-2xl">Inquiries</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">The private consultation inbox is planned; no requests are collected yet.</p>
+          <Button asChild variant="secondary" className="mt-4"><Link href="/admin/inquiries">Open inquiries</Link></Button>
+        </section>
+      </div>
     </section>
   );
 }

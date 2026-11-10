@@ -2,6 +2,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProjectIllustration } from "@/features/marketing/components/project-illustration";
 import { programStages } from "@/content/program";
+import { LatestPosts } from "@/features/marketing/components/latest-posts";
+
+// keep publication changes visible without rebuilding the public homepage
+export const dynamic = "force-dynamic";
 
 // establish the actual public shell without pretending later database features are complete
 export default function HomePage() {
@@ -12,6 +16,7 @@ export default function HomePage() {
       <ProjectIllustration />
     </section>
     <section id="program" className="border-y border-border py-14 sm:py-20"><div className="page-container"><p className="eyebrow">The eight-week journey</p><h2 className="section-heading mt-4">A little structure.<br />A lot of making.</h2><ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{programStages.map((stage, index) => <li key={stage.weeks} className="border-t border-border pt-5"><p className="font-heading text-3xl text-brand">0{index + 1}</p><p className="mt-3 text-xs text-muted">Weeks {stage.weeks}</p><h3 className="mt-2 font-semibold">{stage.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted">{stage.description}</p></li>)}</ol><p className="mt-8 text-xs leading-relaxed text-muted">Proposed activities based on the public curriculum. Admissions, income, and commercial outcomes are not guaranteed.</p></div></section>
-    <section id="faq" className="page-container py-14 sm:py-20"><p className="eyebrow">Before you begin</p><h2 className="section-heading mt-4">A few practical questions.</h2><div className="mt-8 max-w-3xl"><details className="border-t border-border py-5"><summary className="cursor-pointer py-1 font-semibold">Do I need coding experience?</summary><p className="mt-4 leading-relaxed text-muted">The current program is described as beginner-friendly and uses no-code tools. Discuss the right approach for your idea before joining.</p></details><details className="border-y border-border py-5"><summary className="cursor-pointer py-1 font-semibold">How do I learn about fees and availability?</summary><p className="mt-4 leading-relaxed text-muted">Current terms need confirmation. This independent prototype does not take payments or reserve a place.</p></details></div><p className="mt-8 text-sm text-muted">The full homepage and live Journal are delivered in later chunks. This is the application foundation, not a completed submission.</p></section>
+    <section id="faq" className="page-container py-14 sm:py-20"><p className="eyebrow">Before you begin</p><h2 className="section-heading mt-4">A few practical questions.</h2><div className="mt-8 max-w-3xl"><details className="border-t border-border py-5"><summary className="cursor-pointer py-1 font-semibold">Do I need coding experience?</summary><p className="mt-4 leading-relaxed text-muted">The current program is described as beginner-friendly and uses no-code tools. Discuss the right approach for your idea before joining.</p></details><details className="border-y border-border py-5"><summary className="cursor-pointer py-1 font-semibold">How do I learn about fees and availability?</summary><p className="mt-4 leading-relaxed text-muted">Current terms need confirmation. This independent prototype does not take payments or reserve a place.</p></details></div><p className="mt-8 text-sm text-muted">Independent redesign prototype. The Journal is live; consultation requests and the full homepage experience are delivered in later chunks.</p></section>
+    <LatestPosts />
   </>;
 }
