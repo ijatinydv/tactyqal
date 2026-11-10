@@ -1,4 +1,4 @@
-// preserve source attributed curriculum separately from database managed editorial content
+// retain the four-stage outline attributed to the current product brief
 export const programStages = [
   { weeks: "01–02", title: "Find the problem", description: "Explore ideas, meet potential users, and choose a focused problem worth understanding." },
   { weeks: "03–04", title: "Make it tangible", description: "Sketch the experience, test a simple prototype, and learn what needs to change." },
