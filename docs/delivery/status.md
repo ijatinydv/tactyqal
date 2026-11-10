@@ -1,6 +1,6 @@
 # Delivery status
 
-Updated 2026-11-10. Phases 1–3 are complete through Chunk 08. Do not interpret later acceptance checklists as passing implementation tests.
+Updated 2026-11-10. Phases 1–4 are complete through Chunk 10. Do not interpret later acceptance checklists as passing implementation tests.
 
 ## Completed in order
 
@@ -44,8 +44,8 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 | 06 | Shared content service and CRUD APIs | 05 | Complete; see [verification](chunk-06.md) |
 | 07 | Editorial dashboard and real publishing workflow | 06 | Complete; see [verification](chunk-07.md) |
 | 08 | Database-backed Journal/article pages | 07 | Complete; see [verification](chunk-08.md) |
-| 09 | Homepage and project storytelling | 08 | Not started |
-| 10 | Consultation request and private inbox | 09 + database/auth | Not started |
+| 09 | Homepage and project storytelling | 08 | Complete; see [verification](chunk-09.md) |
+| 10 | Consultation request and private inbox | 09 + database/auth | Complete; see [verification](chunk-10.md) |
 | 11 | Synthetic WordPress import proof of concept | 08; after core flow | Optional, not started |
 | 12 | Release verification and polish | 09–10; 11 if included | Not started |
 | 13 | Deployment and safe judge access | 12 | Not started |
@@ -85,6 +85,17 @@ An independent review identified incompatible heading node representations durin
 
 Limitations: no consultation collection, real business calendar integration, production hosting, WordPress migration, or automatic orphan-media cleanup. Demo pages remain noindexed. Article slug changes return 404 at the old address until a verified redirect map is introduced. Public requests fetch current published data; cover assets use immutable generated paths.
 
+## Phase 4 handoff
+
+- PR #1 is confirmed merged. The new Phase 4 branch is derived from the merged `main` baseline, not stacked onto an open Phase 3 PR.
+- Separate commits preserve homepage/project storytelling and consultation/backend/inbox work. Commit messages use descriptive feature names without chunk labels.
+- `pnpm check` passes lint/type checking and 17 unit/component tests.
+- `pnpm db:test` passes 127 assertions, including public/viewer privacy, transactional submission, idempotency conflict, per-email/global rate limits, and editor status/deletion.
+- `pnpm test:e2e` passes all 18 browser tests. Actual form/API submission, identical retry, durable throttling, viewer denial, private review/delete, mocked retry recovery, project navigation, mobile CTA/reflow, and the existing publishing/auth/media flows are covered.
+- `pnpm test:integration` passes persisted blog CRUD with no skipped test. The production build and managed Preview are healthy; the earlier sandbox dev-HMR limitation is unchanged.
+- Desktop/mobile homepage, project and contact screenshots are captured and inspected. The actual editor inbox loads at 390px without page overflow. No real contact information or credentials is included in published evidence.
+- Narrowing the adult relationship enum required fixture values to use `parent_guardian`. Database rate tests isolate counters inside a rolled-back transaction, so they are repeatable without clearing real retained demo counters. This changes test setup, not the enforced limits.
+
 ## Immediate implementation instruction
 
-Proceed to Phase 4 only when requested: complete homepage/project storytelling, then implement minimal consultation requests and the private inbox. Preserve the functioning publication services, permissions and browser tests. Do not fabricate business claims or imply the Inquiries shell already collects customer data. PR creation does not authorise merging.
+Proceed to Phase 5 only when requested: optional synthetic WordPress import proof of concept, then release verification and polish. A hosted business launch still needs approved assets, current commercial/mentor details, reviewed data-retention/abuse controls and deployment configuration. No real calendar, email service, admissions promise, revenue guarantee or production hosting is implied. PR creation does not authorise merging.

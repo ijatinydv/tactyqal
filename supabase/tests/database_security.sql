@@ -31,7 +31,7 @@ SELECT is(
 CALL private.bootstrap_editor('20000000-0000-4000-8000-000000000002');
 
 INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-VALUES ('Private fixture', 'private-fixture@example.invalid', 'guardian', true);
+VALUES ('Private fixture', 'private-fixture@example.invalid', 'parent_guardian', true);
 
 SELECT is(
   (SELECT role FROM public.profiles WHERE id = '20000000-0000-4000-8000-000000000002'),
@@ -61,7 +61,7 @@ SELECT lives_ok(
 SELECT is((SELECT count(*) FROM public.consultation_requests WHERE email = 'private-fixture@example.invalid'), 0::bigint, 'anonymous inquiry remains invisible after delete attempt');
 SELECT throws_ok(
   $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-    VALUES ('Demo Adult', 'adult@example.invalid', 'guardian', true)$$,
+    VALUES ('Demo Adult', 'adult@example.invalid', 'parent_guardian', true)$$,
   '42501', NULL, 'anonymous cannot submit consultation requests directly'
 );
 SELECT throws_ok(
@@ -136,7 +136,7 @@ SELECT lives_ok(
 SELECT is((SELECT count(*) FROM public.consultation_requests WHERE email = 'private-fixture@example.invalid'), 0::bigint, 'viewer inquiry remains invisible after delete attempt');
 SELECT throws_ok(
   $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-    VALUES ('Demo Adult', 'adult@example.invalid', 'guardian', true)$$,
+    VALUES ('Demo Adult', 'adult@example.invalid', 'parent_guardian', true)$$,
   '42501', NULL, 'viewer cannot submit consultation requests directly'
 );
 SELECT throws_ok(
@@ -201,7 +201,7 @@ SELECT lives_ok(
 SELECT is((SELECT count(*) FROM public.categories WHERE slug = 'editor-test-category'), 0::bigint, 'editor category delete takes effect');
 SELECT lives_ok(
   $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-    VALUES ('Synthetic Adult', 'synthetic@example.invalid', 'guardian', true)$$,
+    VALUES ('Synthetic Adult', 'synthetic@example.invalid', 'parent_guardian', true)$$,
   'editor can create an inquiry record'
 );
 SELECT lives_ok(
@@ -241,12 +241,12 @@ SELECT throws_ok(
 );
 SELECT throws_ok(
   $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-    VALUES ('Synthetic Adult', 'not-an-email', 'guardian', true)$$,
+    VALUES ('Synthetic Adult', 'not-an-email', 'parent_guardian', true)$$,
   '23514', NULL, 'database validates inquiry email format'
 );
 SELECT throws_ok(
   $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged)
-    VALUES ('Synthetic Adult', 'adult@example.invalid', 'guardian', false)$$,
+    VALUES ('Synthetic Adult', 'adult@example.invalid', 'parent_guardian', false)$$,
   '23514', NULL, 'database requires data-use acknowledgement'
 );
 SELECT lives_ok(
@@ -295,7 +295,7 @@ SELECT throws_ok(
   '23514', NULL, 'database rejects tab and newline only category names'
 );
 SELECT throws_ok(
-  $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged) VALUES (E'\t\n', 'blank@example.invalid', 'guardian', true)$$,
+  $$INSERT INTO public.consultation_requests (adult_contact_name, email, relationship, data_use_acknowledged) VALUES (E'\t\n', 'blank@example.invalid', 'parent_guardian', true)$$,
   '23514', NULL, 'database rejects tab and newline only adult names'
 );
 SELECT throws_ok(

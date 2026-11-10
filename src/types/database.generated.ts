@@ -39,14 +39,14 @@ export type Database = {
                   ]
                 },"consultation_requests": {
                   Row: {
-                    "adult_contact_name": string,"created_at": string,"data_use_acknowledged": boolean,"email": string,"id": string,"message": string | null,"relationship": string,"status": string,"updated_at": string
+                    "adult_contact_name": string,"created_at": string,"data_use_acknowledged": boolean,"email": string,"id": string,"idempotency_key": string,"message": string | null,"relationship": string,"status": string,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "adult_contact_name": string,"created_at"?: string,"data_use_acknowledged": boolean,"email": string,"id"?: string,"message"?: string | null,"relationship": string,"status"?: string,"updated_at"?: string
+                    "adult_contact_name": string,"created_at"?: string,"data_use_acknowledged": boolean,"email": string,"id"?: string,"idempotency_key"?: string,"message"?: string | null,"relationship": string,"status"?: string,"updated_at"?: string
                   }
                   Update: {
-                    "adult_contact_name"?: string,"created_at"?: string,"data_use_acknowledged"?: boolean,"email"?: string,"id"?: string,"message"?: string | null,"relationship"?: string,"status"?: string,"updated_at"?: string
+                    "adult_contact_name"?: string,"created_at"?: string,"data_use_acknowledged"?: boolean,"email"?: string,"id"?: string,"idempotency_key"?: string,"message"?: string | null,"relationship"?: string,"status"?: string,"updated_at"?: string
                   }
                   Relationships: [
 
@@ -113,6 +113,9 @@ isOneToOne: false
           Functions: {
             "blog_save_post":
 { Args: { "p_category_ids": (string)[],"p_content": Json,"p_cover_alt": string,"p_cover_path": string,"p_excerpt": string,"p_post_id": string,"p_slug": string,"p_status": string,"p_title": string }; Returns: string
+                           },
+"submit_consultation":
+{ Args: { "p_adult_contact_name": string,"p_data_use_acknowledged": boolean,"p_email": string,"p_idempotency_key": string,"p_message": string,"p_relationship": string }; Returns: string
                            }
           }
           Enums: {

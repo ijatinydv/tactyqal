@@ -2,7 +2,7 @@
 
 An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
 
-**Current state:** Phase 3 is implemented: database-backed blog CRUD, a protected structured editor with real cover uploads, private saved previews, publication lifecycle, public Journal/article pages, and live homepage resources. Consultation requests and the full marketing-homepage rollout remain later phases—not simulated here.
+**Current state:** Phases 1–4 are implemented: a completed mentoring homepage, transparent illustrative project stories, database-backed blog publishing, and a real consultation-request/private-inbox workflow. This remains an independent demo, not the official Tactyqal business service; it does not book appointments or send email.
 
 ## Read in order
 
@@ -34,6 +34,12 @@ Sign in → Posts → New post → add title/slug/excerpt and article blocks →
 
 Uploads are decoded and re-encoded to WebP before storage; covers are intentionally public even when an article is a draft. The server enforces authorisation and RLS independently of the UI. See [API contract](docs/architecture/blog-api.md), [editor/media](docs/delivery/chunk-07.md), and [public Journal](docs/delivery/chunk-08.md). The block editor preserves untouched formatting and explicitly warns before flattening an edited formatted block; it is not a general HTML editor.
 
+## Consultation demo
+
+`/contact` accepts synthetic adult contact details, relationship, optional message and an explicit data-use acknowledgement. A successful submit returns an opaque receipt—not a booking or email. An invited editor can review, change status, and delete requests at `/admin/inquiries`. Public visitors and viewer accounts cannot read the inbox.
+
+The database atomically enforces identical-request retries, three accepted requests per email/hour and thirty globally/hour. A narrow validated anonymous function performs submission; no service-role key is used by normal request handling. Use `example.invalid` contacts only. Records remain until editor deletion or an explicit demo reset; this is not a production retention commitment. See [consultation architecture](docs/architecture/consultations.md), [workflow evidence](docs/delivery/chunk-10.md), and `/privacy`.
+
 ## Preview the design study
 
 Open `docs/design/boards/index.html` in a browser. Alternatively, run `python3 -m http.server 8000 --bind 127.0.0.1` from the repository root and visit `http://localhost:8000/docs/design/boards/`. Do not expose this root-directory server publicly. The study has no application dependencies or backend; its static controls are explicitly labelled as specimens. Google Fonts are optional presentation resources, with local fallbacks if unavailable.
@@ -48,4 +54,4 @@ The [audit](docs/research/brand-ux-audit.md) records public sources, observation
 
 ## Verification at this phase
 
-Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 3 verification includes lint/type/build checks, 13 unit/component tests, 100 database assertions, persisted HTTP CRUD, and the real browser suites. See [current delivery status](docs/delivery/status.md) for exact results and limits.
+Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 4 verification includes lint/type/build checks, 17 unit/component tests, 127 database assertions, persisted HTTP CRUD, and 18 real browser tests. See [current delivery status](docs/delivery/status.md) for exact results and limits.
