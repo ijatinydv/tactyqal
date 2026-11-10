@@ -31,6 +31,9 @@ export type Post = {
   excerpt: string;
   content: RichDocument;
   author_id: string | null;
+  imported_source_url?: string | null;
+  imported_published_at?: string | null;
+  imported_author?: string | null;
   cover_path: string | null;
   cover_alt: string;
   status: "draft" | "published";

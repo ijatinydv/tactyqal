@@ -2,7 +2,7 @@
 
 An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
 
-**Current state:** Phases 1–4 are implemented: a completed mentoring homepage, transparent illustrative project stories, database-backed blog publishing, and a real consultation-request/private-inbox workflow. This remains an independent demo, not the official Tactyqal business service; it does not book appointments or send email.
+**Current state:** Phases 1–5 are implemented: the mentoring site, private consultation workflow, database-backed publishing, a local-only synthetic WordPress import proof of concept, and release/accessibility regression coverage. Hosted deployment and final submission packaging remain Phase 6.
 
 ## Read in order
 
@@ -40,6 +40,14 @@ Uploads are decoded and re-encoded to WebP before storage; covers are intentiona
 
 The database atomically enforces identical-request retries, three accepted requests per email/hour and thirty globally/hour. A narrow validated anonymous function performs submission; no service-role key is used by normal request handling. Use `example.invalid` contacts only. Records remain until editor deletion or an explicit demo reset; this is not a production retention commitment. See [consultation architecture](docs/architecture/consultations.md), [workflow evidence](docs/delivery/chunk-10.md), and `/privacy`.
 
+## Synthetic WordPress import
+
+Run `pnpm import:wordpress` for a bounded local-file dry run; add `--apply` only to write drafts into the disposable local Supabase stack. `pnpm test:import` enables all four converter and persisted idempotency/rollback tests with no skip. Imports retain source URL/date/author/category provenance, never overwrite existing editorial changes, and report manual-slug conflicts. No live WordPress archive is crawled and no source images or arbitrary layouts are imported. See [import design](docs/architecture/wordpress-import.md) and [verification](docs/delivery/chunk-11.md).
+
+## Release evidence
+
+`pnpm test:e2e` includes Axe Core checks for sampled public/private pages, mobile-menu accessibility and enlarged-text reflow. These automated rules do not establish WCAG certification. The native Journal search now has a typing/submission regression test. See [release verification](docs/delivery/chunk-12.md) for repaired defects, actual local performance measurements, and deployment limitations. Do not present the managed local Preview as hosted production.
+
 ## Preview the design study
 
 Open `docs/design/boards/index.html` in a browser. Alternatively, run `python3 -m http.server 8000 --bind 127.0.0.1` from the repository root and visit `http://localhost:8000/docs/design/boards/`. Do not expose this root-directory server publicly. The study has no application dependencies or backend; its static controls are explicitly labelled as specimens. Google Fonts are optional presentation resources, with local fallbacks if unavailable.
@@ -54,4 +62,4 @@ The [audit](docs/research/brand-ux-audit.md) records public sources, observation
 
 ## Verification at this phase
 
-Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 4 verification includes lint/type/build checks, 17 unit/component tests, 127 database assertions, persisted HTTP CRUD, and 18 real browser tests. See [current delivery status](docs/delivery/status.md) for exact results and limits.
+Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 4 verification includes lint/type/build checks, 17 unit/component tests, 131 database assertions, real importer/HTTP persistence tests, and the full browser suite including accessibility/reflow scans. See [current delivery status](docs/delivery/status.md) for exact results and limits.

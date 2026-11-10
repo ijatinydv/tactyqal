@@ -1,6 +1,6 @@
 # Delivery status
 
-Updated 2026-11-10. Phases 1–4 are complete through Chunk 10. Do not interpret later acceptance checklists as passing implementation tests.
+Updated 2026-11-10. Phases 1–5 are complete through Chunk 12. Do not interpret later acceptance checklists as passing implementation tests.
 
 ## Completed in order
 
@@ -46,8 +46,8 @@ At the Phase 1 boundary, no application or database tests applied. Chunk 03 adds
 | 08 | Database-backed Journal/article pages | 07 | Complete; see [verification](chunk-08.md) |
 | 09 | Homepage and project storytelling | 08 | Complete; see [verification](chunk-09.md) |
 | 10 | Consultation request and private inbox | 09 + database/auth | Complete; see [verification](chunk-10.md) |
-| 11 | Synthetic WordPress import proof of concept | 08; after core flow | Optional, not started |
-| 12 | Release verification and polish | 09–10; 11 if included | Not started |
+| 11 | Synthetic WordPress import proof of concept | 08; after core flow | Complete; see [verification](chunk-11.md) |
+| 12 | Release verification and polish | 09–10; 11 if included | Complete; see [verification](chunk-12.md) |
 | 13 | Deployment and safe judge access | 12 | Not started |
 | 14 | README, evidence and walkthrough submission | 13 | Not started |
 
@@ -96,6 +96,18 @@ Limitations: no consultation collection, real business calendar integration, pro
 - Desktop/mobile homepage, project and contact screenshots are captured and inspected. The actual editor inbox loads at 390px without page overflow. No real contact information or credentials is included in published evidence.
 - Narrowing the adult relationship enum required fixture values to use `parent_guardian`. Database rate tests isolate counters inside a rolled-back transaction, so they are repeatable without clearing real retained demo counters. This changes test setup, not the enforced limits.
 
+## Phase 5 handoff
+
+- PR #2 is confirmed merged; Phase 5 starts from its merged `main` baseline on a separate feature branch.
+- Import proof of concept and release repairs are committed separately with descriptive messages, without chunk labels.
+- The actual fixture CLI produced dry_run → inserted → skipped; its synthetic draft was inspected in the protected editor, then only that explicitly created fixture was removed to keep the demo seed archive reproducible.
+- `pnpm test:import` passes four tests with persistence enabled and no skip: sanitisation, bounded diagnostics, repeat-import/editor-change preservation, provenance/category mapping, slug collision and transaction rollback.
+- `pnpm db:test` passes 131 assertions, including import RPC grants restricted to the operational role. `pnpm check` passes 17 unit/component tests plus lint and strict TypeScript.
+- Automated accessibility checks cover eight public/auth routes, four private editorial routes, the mobile dialog and 200% text reflow at 375px. They are sampled rule checks, not certification.
+- The release audit repaired an uneditable native search field, mismatched accessible link names, duplicate SVG title IDs, and enlarged-text overflow. Regression checks exercise the actual corrected behavior rather than weakening expectations.
+- One fresh local production-browser performance sample measured LCP 628ms, CLS0.0331, FCP628ms, TTFB84.9ms and281894bytes at390×844 without throttling. These figures are not hosted/field/Lighthouse/INP claims.
+- Final production build and managed Preview pass. The full 20-test browser suite, persisted HTTP CRUD, four importer tests with no skip, 131 database assertions, and 17 unit/component tests pass. No live WordPress migration, hosted deployment or submission video is implied.
+
 ## Immediate implementation instruction
 
-Proceed to Phase 5 only when requested: optional synthetic WordPress import proof of concept, then release verification and polish. A hosted business launch still needs approved assets, current commercial/mentor details, reviewed data-retention/abuse controls and deployment configuration. No real calendar, email service, admissions promise, revenue guarantee or production hosting is implied. PR creation does not authorise merging.
+Proceed to Phase 6 only when requested: authorised Vercel/Supabase deployment and safe judge access, then final README/evidence/walkthrough packaging. Confirm real-business content rights, commercial details, privacy/retention needs and canonical origins before any official launch. Keep demo data synthetic and do not publish editor credentials. PR creation does not authorise merging.

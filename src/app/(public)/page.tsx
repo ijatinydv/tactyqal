@@ -23,7 +23,7 @@ export default function HomePage() {
           </div>
           <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted">The studies shown are original illustrative concepts—not student stories, completed products, or promised outcomes.</p>
         </div>
-        <Link href={`/projects/${projectStories[0].slug}`} aria-label="Explore the illustrative Neighbourhood Library project study" className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+        <Link href={`/projects/${projectStories[0].slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
           <ProjectArtwork project={projectStories[0]} className="shadow-[12px_12px_0_0_#dce5d8] sm:shadow-[20px_20px_0_0_#dce5d8]" />
           <p className="mt-7 text-xs uppercase tracking-[0.16em] text-muted">A possible project · Neighbourhood Library</p>
         </Link>
@@ -57,7 +57,7 @@ export default function HomePage() {
         <div className="mt-8 grid gap-10 border-t border-border pt-7 md:grid-cols-2 md:gap-8">
           {projectStories.map((project, index) => (
             <article key={project.slug} className="grid items-start gap-5 sm:grid-cols-[1fr_1fr] sm:gap-6">
-              <Link href={`/projects/${project.slug}`} aria-label={`Explore ${project.title}, an illustrative concept`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <Link href={`/projects/${project.slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
                 <ProjectArtwork project={project} />
               </Link>
               <div>
@@ -100,8 +100,8 @@ export default function HomePage() {
         <div className="bg-[#245544] px-6 py-9 text-[#fffdf8] sm:px-10 sm:py-12">
           <p className="text-xs uppercase tracking-[0.16em] text-[#dce5d8]">A first conversation, when the details are ready</p>
           <div className="mt-4 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
-            <div><h2 className="font-heading text-3xl leading-tight sm:text-4xl">Curiosity first.<br />The practical details next.</h2><p className="mt-4 max-w-2xl leading-relaxed text-[#e9eee8]">Talk through an idea and the support it might need. Try the request workflow using synthetic adult contact details only.</p></div>
-            <Button variant="secondary" asChild><Link href="/contact">Request a consultation <span aria-hidden="true">→</span></Link></Button>
+            <div className="w-full min-w-0"><h2 className="font-heading text-3xl leading-tight sm:text-4xl">Curiosity first.<br />The practical details next.</h2><p className="mt-4 max-w-2xl leading-relaxed text-[#e9eee8]">Talk through an idea and the support it might need. Try the request workflow using synthetic adult contact details only.</p></div>
+            <Button variant="secondary" className="max-w-full whitespace-normal border-white text-white hover:bg-white/10" asChild><Link href="/contact">Request a consultation <span aria-hidden="true">→</span></Link></Button>
           </div>
         </div>
       </section>

@@ -22,7 +22,8 @@ export function JournalFilters({
             id="journal-q"
             name="q"
             type="search"
-            value={query}
+            key={query}
+            defaultValue={query}
             maxLength={100}
             placeholder="Try a topic or idea"
             className="w-full rounded-lg border border-control-border bg-white px-4 py-3 text-ink placeholder:text-muted"
