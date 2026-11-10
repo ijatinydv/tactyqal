@@ -22,9 +22,18 @@ export function getCanonicalUrl(pathname: string): string | undefined {
   return siteUrl ? new URL(pathname, siteUrl).toString() : undefined;
 }
 
-// serve validated cover paths through the same-origin image proxy
+// serve validated cover paths through the same-origin image proxy or direct remote URLs
 export function getPublicCoverUrl(coverPath: string | null | undefined): string | undefined {
   if (!coverPath) return undefined;
+
+  if (coverPath.startsWith("http://") || coverPath.startsWith("https://")) {
+    try {
+      const url = new URL(coverPath);
+      return ["http:", "https:"].includes(url.protocol) ? url.href : undefined;
+    } catch {
+      return undefined;
+    }
+  }
 
   const segments = coverPath.split("/");
   if (

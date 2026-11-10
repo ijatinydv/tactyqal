@@ -111,10 +111,18 @@ export const safeRichDocumentSchema = documentRootSchema.superRefine((document, 
 }).transform((document) => document as RichDocument);
 
 // reject unsafe object paths before they can be rendered as public media
-const coverPathSchema = z.string().max(512).regex(/^[A-Za-z0-9_-]+\/[A-Za-z0-9][A-Za-z0-9._-]{0,240}$/).refine(
-  (path) => !path.split("/").some((segment) => segment === "." || segment === ".."),
-  "Cover path must not traverse directories",
-);
+const coverPathSchema = z.string().max(512).refine((val) => {
+  if (/^https?:\/\/[^\s]+$/.test(val)) {
+    try {
+      const url = new URL(val);
+      return ["http:", "https:"].includes(url.protocol);
+    } catch {
+      return false;
+    }
+  }
+  return /^[A-Za-z0-9_-]+\/[A-Za-z0-9][A-Za-z0-9._-]{0,240}$/.test(val) &&
+    !val.split("/").some((segment) => segment === "." || segment === "..");
+}, "Cover path must be a valid URL or storage path without directory traversal");
 
 // validate every persisted editor field against both product and database bounds
 const savePostFieldsSchema = z.object({
