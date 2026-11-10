@@ -24,7 +24,9 @@
     "env:local": "node scripts/local-env.mjs",
     "db:migrate": "supabase migration up --local",
     "editor:local": "node scripts/create-local-editor.mjs",
-    "test:integration": "node scripts/test-blog-api.mjs"
+    "test:integration": "node scripts/test-blog-api.mjs",
+    "import:wordpress": "node scripts/import-wordpress.mjs",
+    "test:import": "WORDPRESS_IMPORT_INTEGRATION=1 node --test tests/integration/wordpress-import.test.mjs"
   },
   "dependencies": {
     "@fontsource/manrope": "5.3.0",

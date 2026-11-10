@@ -1,0 +1,31 @@
+{
+  "sourceUrl": "https://wordpress.example.test",
+  "posts": [
+    {
+      "id": 501,
+      "date": "2021-04-17T11:30:00",
+      "date_gmt": "2021-04-17T18:30:00",
+      "slug": "synthetic-woodworking-journal",
+      "status": "publish",
+      "link": "https://wordpress.example.test/2021/04/synthetic-woodworking-journal/",
+      "title": { "rendered": "Synthetic <em>Woodworking</em> Journal" },
+      "excerpt": { "rendered": "<p>A fictional workshop note for import testing.</p>" },
+      "content": {
+        "rendered": "<h2>Planning the sample shelf</h2><p>This fictional article describes a small sample shelf built from reclaimed boards. <strong>Measure twice</strong> before cutting, then review the finished joints.</p><p><a href=\"https://example.test/guide\" onclick=\"alert(1)\">Safe sample guide</a> <a href=\"javascript:alert(1)\">unsafe link</a></p><ul><li>Check the dimensions</li><li>Sand the edges</li></ul><script>window.fixtureExecuted = true</script><iframe src=\"https://example.test/frame\">hidden frame text</iframe><img src=\"https://example.test/image.jpg\" onerror=\"alert(1)\" alt=\"ignored image\">"
+      },
+      "author": 14,
+      "_embedded": {
+        "author": [{ "id": 14, "name": "Morgan Example" }],
+        "wp:term": [[{ "id": 22, "taxonomy": "category", "name": "Workshop Notes", "slug": "workshop-notes" }]]
+      }
+    },
+    {
+      "id": "not-a-wordpress-id",
+      "slug": "malformed-synthetic-record",
+      "date_gmt": "2021-04-17T18:30:00",
+      "title": { "rendered": "Malformed sample" },
+      "excerpt": { "rendered": "sample" },
+      "content": { "rendered": "<p>Rejected fixture record.</p>" }
+    }
+  ]
+}

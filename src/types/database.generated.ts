@@ -79,14 +79,14 @@ isOneToOne: false
                   ]
                 },"posts": {
                   Row: {
-                    "author_id": string | null,"content": NonNullable<Json>,"cover_alt": string,"cover_path": string | null,"created_at": string,"excerpt": string,"id": string,"published_at": string | null,"slug": string,"status": string,"title": string,"updated_at": string
+                    "author_id": string | null,"content": NonNullable<Json>,"cover_alt": string,"cover_path": string | null,"created_at": string,"excerpt": string,"id": string,"imported_author": string | null,"imported_published_at": string | null,"imported_source_id": string | null,"imported_source_provider": string | null,"imported_source_url": string | null,"published_at": string | null,"slug": string,"status": string,"title": string,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "author_id"?: string | null,"content": NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt": string,"id"?: string,"published_at"?: string | null,"slug": string,"status"?: string,"title": string,"updated_at"?: string
+                    "author_id"?: string | null,"content": NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt": string,"id"?: string,"imported_author"?: string | null,"imported_published_at"?: string | null,"imported_source_id"?: string | null,"imported_source_provider"?: string | null,"imported_source_url"?: string | null,"published_at"?: string | null,"slug": string,"status"?: string,"title": string,"updated_at"?: string
                   }
                   Update: {
-                    "author_id"?: string | null,"content"?: NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt"?: string,"id"?: string,"published_at"?: string | null,"slug"?: string,"status"?: string,"title"?: string,"updated_at"?: string
+                    "author_id"?: string | null,"content"?: NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt"?: string,"id"?: string,"imported_author"?: string | null,"imported_published_at"?: string | null,"imported_source_id"?: string | null,"imported_source_provider"?: string | null,"imported_source_url"?: string | null,"published_at"?: string | null,"slug"?: string,"status"?: string,"title"?: string,"updated_at"?: string
                   }
                   Relationships: [
 
@@ -116,6 +116,9 @@ isOneToOne: false
                            },
 "submit_consultation":
 { Args: { "p_adult_contact_name": string,"p_data_use_acknowledged": boolean,"p_email": string,"p_idempotency_key": string,"p_message": string,"p_relationship": string }; Returns: string
+                           },
+"wordpress_import_post":
+{ Args: { "p_categories": Json,"p_post": Json }; Returns: string
                            }
           }
           Enums: {
