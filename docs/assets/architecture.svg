@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1260" viewBox="0 0 1600 1260" role="img" aria-labelledby="title desc">
+  <title id="title">Tactyqal application architecture and trust boundaries</title>
+  <desc id="desc">One Next.js modular monolith on Vercel serves public visitors and authenticated editors. Thin routes use shared feature services, with server authorization and Supabase row-level security. Consultation submission uses a narrow validated database function; private inquiries remain editor only. Covers are intentionally public. WordPress import is an operational local-only proof of concept, not part of deployed requests.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#245544" />
+    </marker>
+  </defs>
+  <rect width="1600" height="1260" fill="#f7f5ef" />
+  <g font-family="DejaVu Sans, sans-serif">
+    <text x="60" y="57" font-size="17" fill="#596257" font-weight="600">TACTYQAL / THE BUILDER’S STUDIO</text>
+    <text x="60" y="108" font-size="38" fill="#202620" font-weight="600">One application. Explicit trust boundaries.</text>
+    <text x="60" y="144" font-size="19" fill="#596257" font-weight="400">Implemented architecture · Vercel is the deployment target, not a claimed live deployment</text>
+    <rect x="60" y="177" width="710" height="115" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="82" y="212" font-size="23" fill="#245544" font-weight="600">Public visitors</text>
+    <text x="82" y="247" font-size="18" fill="#47564c" font-weight="400">Program, projects, Journal and article pages · adult demo request form</text>
+    <rect x="830" y="177" width="710" height="115" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="852" y="212" font-size="23" fill="#245544" font-weight="600">Invited editors</text>
+    <text x="852" y="247" font-size="18" fill="#47564c" font-weight="400">Password sign-in · posts / preview / publication · private request inbox</text>
+    <path d="M415 292 L415 340" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M1185 292 L1185 340" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <rect x="40" y="340" width="1520" height="450" rx="18" fill="#e9eee8" stroke="#778273" />
+    <text x="65" y="375" font-size="17" fill="#245544" font-weight="600">VERCEL TARGET · SINGLE NEXT.JS APP ROUTER / TYPESCRIPT DEPLOYMENT</text>
+    <rect x="65" y="396" width="470" height="128" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="87" y="431" font-size="23" fill="#245544" font-weight="600">Public rendering</text>
+    <text x="87" y="466" font-size="18" fill="#47564c" font-weight="400">Server pages → feature services</text>
+    <text x="87" y="493" font-size="18" fill="#47564c" font-weight="400">Anonymous, cookie-free published reads</text>
+    <rect x="565" y="396" width="470" height="128" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="587" y="431" font-size="23" fill="#245544" font-weight="600">Thin HTTP adapters</text>
+    <text x="587" y="466" font-size="18" fill="#47564c" font-weight="400">JSON validation, errors and same origin</text>
+    <text x="587" y="493" font-size="18" fill="#47564c" font-weight="400">Post CRUD · consultation submission</text>
+    <rect x="1065" y="396" width="470" height="128" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="1087" y="431" font-size="23" fill="#245544" font-weight="600">Editor session boundary</text>
+    <text x="1087" y="466" font-size="18" fill="#47564c" font-weight="400">SSR cookies + proxy refresh</text>
+    <text x="1087" y="493" font-size="18" fill="#47564c" font-weight="400">Fresh getUser() + database role checks</text>
+    <path d="M300 524 L300 564" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M800 524 L800 564" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M1300 524 L1300 564" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <rect x="65" y="564" width="470" height="171" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="87" y="599" font-size="23" fill="#245544" font-weight="600">Blog feature</text>
+    <text x="87" y="634" font-size="18" fill="#47564c" font-weight="400">Shared services for pages and APIs</text>
+    <text x="87" y="661" font-size="18" fill="#47564c" font-weight="400">Atomic post + category RPC / RLS</text>
+    <text x="87" y="688" font-size="18" fill="#47564c" font-weight="400">Dynamic published reads; safe JSON text</text>
+    <rect x="565" y="564" width="470" height="171" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="587" y="599" font-size="23" fill="#245544" font-weight="600">Consultation feature</text>
+    <text x="587" y="634" font-size="18" fill="#47564c" font-weight="400">Minimal adult details + consent</text>
+    <text x="587" y="661" font-size="18" fill="#47564c" font-weight="400">Opaque receipt; idempotency + limits</text>
+    <text x="587" y="688" font-size="18" fill="#47564c" font-weight="400">Validated, narrow submission RPC</text>
+    <rect x="1065" y="564" width="470" height="171" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="1087" y="599" font-size="23" fill="#245544" font-weight="600">Media + editorial workspace</text>
+    <text x="1087" y="634" font-size="18" fill="#47564c" font-weight="400">Editor-only raster decode / WebP</text>
+    <text x="1087" y="661" font-size="18" fill="#47564c" font-weight="400">Public cover delivery through app</text>
+    <text x="1087" y="688" font-size="18" fill="#47564c" font-weight="400">Private inbox read / status / delete</text>
+    <text x="65" y="767" font-size="17" fill="#245544" font-weight="400">No routine service-role key · browser bundles contain only public connection settings · no self-HTTP from server pages</text>
+    <path d="M300 790 V810 H1300 V790 M800 790 V810" stroke="#245544" stroke-width="2" fill="none" />
+    <path d="M300 810 L300 845" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M800 810 L800 845" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <path d="M1300 810 L1300 845" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" />
+    <text x="402" y="834" font-size="14" fill="#596257" font-weight="400">SHARED BACKEND ADAPTERS · AUTH / DATABASE / MEDIA AS REQUIRED</text>
+    <rect x="60" y="845" width="470" height="184" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="82" y="880" font-size="23" fill="#245544" font-weight="600">Supabase PostgreSQL + RLS</text>
+    <text x="82" y="915" font-size="18" fill="#47564c" font-weight="400">Profiles / posts / categories / joins</text>
+    <text x="82" y="942" font-size="18" fill="#47564c" font-weight="400">Private adult consultation requests</text>
+    <text x="82" y="969" font-size="18" fill="#47564c" font-weight="400">Database-owned viewer/editor roles</text>
+    <text x="82" y="996" font-size="18" fill="#47564c" font-weight="400">Atomic functions + durable counters</text>
+    <rect x="565" y="845" width="470" height="184" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="587" y="880" font-size="23" fill="#245544" font-weight="600">Supabase Auth</text>
+    <text x="587" y="915" font-size="18" fill="#47564c" font-weight="400">Administrator-provisioned accounts</text>
+    <text x="587" y="942" font-size="18" fill="#47564c" font-weight="400">Verified identity, cookie refresh</text>
+    <text x="587" y="969" font-size="18" fill="#47564c" font-weight="400">No public self-registration</text>
+    <text x="587" y="996" font-size="18" fill="#47564c" font-weight="400">Authorisation rechecked per operation</text>
+    <rect x="1070" y="845" width="470" height="184" rx="12" fill="#ffffff" stroke="#bac7bd" />
+    <text x="1092" y="880" font-size="23" fill="#245544" font-weight="600">Supabase Storage</text>
+    <text x="1092" y="915" font-size="18" fill="#47564c" font-weight="400">covers: intentionally PUBLIC media</text>
+    <text x="1092" y="942" font-size="18" fill="#47564c" font-weight="400">Editor folder / MIME / size policies</text>
+    <text x="1092" y="969" font-size="18" fill="#47564c" font-weight="400">Draft text stays private, cover bytes do not</text>
+    <text x="1092" y="996" font-size="18" fill="#47564c" font-weight="400">No secret key needed for normal uploads</text>
+    <text x="60" y="1068" font-size="17" fill="#596257" font-weight="600">SEPARATE OPERATIONAL PATH — NOT A PUBLIC OR VERCEL ENDPOINT</text>
+    <rect x="60" y="1090" width="710" height="105" rx="12" fill="#f0eee7" stroke="#bac7bd" />
+    <text x="82" y="1125" font-size="23" fill="#245544" font-weight="600">Local WordPress import proof of concept</text>
+    <text x="82" y="1160" font-size="18" fill="#47564c" font-weight="400">Synthetic JSON → inert HTML conversion → private drafts / provenance</text>
+    <path d="M790 1142 L857 1142" stroke="#245544" stroke-width="2.5" fill="none" marker-end="url(#arrow)" stroke-dasharray="7 5" />
+    <rect x="880" y="1090" width="660" height="105" rx="12" fill="#f0eee7" stroke="#bac7bd" />
+    <text x="902" y="1125" font-size="23" fill="#245544" font-weight="600">Disposable local Supabase only</text>
+    <text x="902" y="1160" font-size="18" fill="#47564c" font-weight="400">Explicit --apply · service-role-only import RPC · repeats skip</text>
+    <text x="60" y="1233" font-size="17" fill="#596257" font-weight="400">Defense in depth: server checks + database RLS. No email, calendar booking, live WordPress crawling or hosted migration is implied.</text>
+  </g>
+</svg>

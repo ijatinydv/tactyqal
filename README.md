@@ -1,65 +1,225 @@
 # Tactyqal — The Builder’s Studio
 
-An independent hiring-challenge submission: a considered mentoring-brand redesign and an integrated, secure editorial platform.
+**A thoughtful mentoring-brand redesign, backed by a working editorial platform.**
 
-**Current state:** Phases 1–5 are implemented: the mentoring site, private consultation workflow, database-backed publishing, a local-only synthetic WordPress import proof of concept, and release/accessibility regression coverage. Hosted deployment and final submission packaging remain Phase 6.
+Built for the **Tactyqal Labs Full Stack Developer Intern hiring challenge**. This independent submission combines a responsive public website, database-backed publishing, a protected editor workspace, and private consultation requests in one maintainable application.
 
-## Read in order
+[Explore the architecture](#architecture) · [Run locally](#run-locally) · [Deploy to Vercel](docs/deployment/vercel.md) · [Review the API](docs/architecture/blog-api.md)
 
-1. [Repository structure and architecture](docs/architecture/repository-structure.md)
-2. [Chunk 01: evidence-based brand and UX audit](docs/research/brand-ux-audit.md)
-3. [Product brief, journeys, and scope](docs/product/product-brief.md)
-4. [Chunk 02: design specification](docs/design/design-specification.md)
-5. [Screen acceptance checklist](docs/design/screen-acceptance.md)
-6. [Visual design board](docs/design/boards/index.html)
-7. [Delivery status and remaining decisions](docs/delivery/status.md)
+> **Demo status:** the implementation is verified locally. A hosted deployment and recorded walkthrough have not been verified or supplied in this repository yet. After deploying, add the confirmed live URL and walkthrough link here before submitting. Do not treat a local Preview or a successful build as proof of hosted functionality.
+>
+> **Source code:** [github.com/ijatinydv/tactyqal](https://github.com/ijatinydv/tactyqal). Editor credentials must be shared privately, never committed or published in this README.
 
-## Run the application
+## The brief, addressed
 
-Use Node 22–24 and pnpm 10.34.9. Run `pnpm install --frozen-lockfile`, then `pnpm dev`. Validate with `pnpm check`, `pnpm build`, and `pnpm test:e2e`. See [Chunk 03 verification and version decisions](docs/delivery/chunk-03.md). The `/design-system` reference is available only in development.
+| Challenge | Delivered |
+|---|---|
+| **Homepage redesign** | A responsive, editorial visual system with clear positioning, an eight-week program journey, practical parent information, FAQs, and original illustrative project stories |
+| **Blog backend** | PostgreSQL schema, migrations, categories, protected CRUD APIs, draft/published lifecycle, safe structured content, and real cover storage |
+| **Demonstrate the backend** | An invited-editor workspace for saving, previewing, publishing, updating, unpublishing, and deleting content; a live public Journal with search, categories, and pagination |
+| **Submission evidence** | Complete source, reproducible local setup, database/browser tests, documented architecture and deployment instructions; hosted URL/walkthrough to be added after verification |
 
-## Local Supabase
+The brief describes the existing main site as CodeIgniter and its blog as WordPress. This is a standalone redesign/proof of concept, not a claim that either production system has been replaced or migrated.
 
-The repository requires a Docker daemon and Supabase CLI 3.0.0. Run `pnpm db:start`, `pnpm env:local`, and `pnpm db:test`; normal managed setup handles startup and pending migrations idempotently. Do not run `pnpm db:reset` unless you intend to erase the disposable local data. See [Chunk 04](docs/delivery/chunk-04.md) and [database architecture](docs/architecture/database.md). Keep hosted credentials out of chat and Git; the local helper writes only an ignored URL/publishable key.
+## Product direction
 
-## Editor access and verification
+**The Builder’s Studio** uses warm paper tones, forest-green actions, editorial typography, and deliberate whitespace instead of a generic AI/SaaS template. The experience speaks to young builders while giving parents concrete information about the mentoring process and next steps.
 
-Run `pnpm editor:local` to create a disposable confirmed local editor. The helper stores generated credentials in ignored `.hoplite/runtime/local-editor.json` and never prints the password. Never publish that file. See [authentication boundaries](docs/architecture/authentication.md) and [Chunk 05 evidence](docs/delivery/chunk-05.md).
+Project illustrations are original concept studies, **not student achievements**. Sample articles are explicitly identified as demo content. No invented mentor biographies, testimonials, fees, admissions promises, revenue claims, or scarcity counters are used. Research and content provenance are documented in the [brand and UX audit](docs/research/brand-ux-audit.md).
 
-`pnpm test:e2e` runs public, real Auth, API-access, media, and end-to-end publishing browser tests. `pnpm test:integration` creates an isolated local editor for the persisted HTTP CRUD suite. The test helpers create temporary accounts and remove them afterwards. Use the isolated local stack, not a customer environment. Managed Preview builds and runs the production app; development HMR was unreliable in this sandbox, so production interaction checks are the evidence of working behavior.
+## What works
 
-## Editorial workflow
+### Public website
 
-Sign in → Posts → New post → add title/slug/excerpt and article blocks → select categories → optionally upload a cover and provide alt text → Save draft → Preview saved version → Publish. Published articles appear on `/blog` and the homepage. Saving published changes updates the public article; unpublishing and deleting remove public access. Draft preview requires editor authentication.
+- Responsive homepage and project index/detail pages with transparent concept provenance.
+- Database-backed Journal, shareable search/category/page URLs, readable article pages, metadata, and a generated public sitemap.
+- Homepage resources update after publication without a deployment.
+- Minimal adult consultation form with explicit data-use acknowledgement and honest success/error states.
 
-Uploads are decoded and re-encoded to WebP before storage; covers are intentionally public even when an article is a draft. The server enforces authorisation and RLS independently of the UI. See [API contract](docs/architecture/blog-api.md), [editor/media](docs/delivery/chunk-07.md), and [public Journal](docs/delivery/chunk-08.md). The block editor preserves untouched formatting and explicitly warns before flattening an edited formatted block; it is not a general HTML editor.
+### Editorial workspace
 
-## Consultation demo
+- Administrator-provisioned password sign-in, verified identity, database-owned roles, and guarded server operations.
+- Persisted drafts, saved private previews, categories, cover images/alt text, publishing, editing, unpublishing, and deletion.
+- Structured blocks rather than arbitrary HTML. Untouched rich-text formatting is preserved; editing a formatted block warns before flattening it to plain text.
+- Failed saves preserve input. Unsaved navigation requires confirmation; no fake autosave indicator.
+- Private request inbox with status filtering, review/close transitions, and confirmed deletion.
 
-`/contact` accepts synthetic adult contact details, relationship, optional message and an explicit data-use acknowledgement. A successful submit returns an opaque receipt—not a booking or email. An invited editor can review, change status, and delete requests at `/admin/inquiries`. Public visitors and viewer accounts cannot read the inbox.
+### Backend and safety
 
-The database atomically enforces identical-request retries, three accepted requests per email/hour and thirty globally/hour. A narrow validated anonymous function performs submission; no service-role key is used by normal request handling. Use `example.invalid` contacts only. Records remain until editor deletion or an explicit demo reset; this is not a production retention commitment. See [consultation architecture](docs/architecture/consultations.md), [workflow evidence](docs/delivery/chunk-10.md), and `/privacy`.
+- Atomic post/category writes and RLS-enforced draft/contact privacy.
+- Same-origin checks, bounded bodies and pagination, field validation, and consistent JSON errors.
+- Raster signature checks, full image decoding, pixel/size bounds, and metadata-stripping WebP conversion before storage.
+- Opaque consultation receipts, idempotent retries, and durable database limits: three accepted requests per email/hour and thirty globally/hour.
+- No service-role credential in normal application requests or browser bundles.
 
-## Synthetic WordPress import
+### Migration demonstration
 
-Run `pnpm import:wordpress` for a bounded local-file dry run; add `--apply` only to write drafts into the disposable local Supabase stack. `pnpm test:import` enables all four converter and persisted idempotency/rollback tests with no skip. Imports retain source URL/date/author/category provenance, never overwrite existing editorial changes, and report manual-slug conflicts. No live WordPress archive is crawled and no source images or arbitrary layouts are imported. See [import design](docs/architecture/wordpress-import.md) and [verification](docs/delivery/chunk-11.md).
+The **local-only WordPress importer** defaults to a dry run. Explicit apply imports synthetic REST-shaped records as private drafts, retaining source URL, publication date, author attribution, slug, and categories. Repeated imports skip existing source identities without overwriting editorial changes; occupied manual slugs are reported as conflicts. HTML is converted through an inert allowlist, and each post/category operation is atomic.
 
-## Release evidence
+This does not crawl a live archive, download source media, recreate arbitrary WordPress layouts, or activate redirects. [Read the import design](docs/architecture/wordpress-import.md).
 
-`pnpm test:e2e` includes Axe Core checks for sampled public/private pages, mobile-menu accessibility and enlarged-text reflow. These automated rules do not establish WCAG certification. The native Journal search now has a typing/submission regression test. See [release verification](docs/delivery/chunk-12.md) for repaired defects, actual local performance measurements, and deployment limitations. Do not present the managed local Preview as hosted production.
+## Architecture
 
-## Preview the design study
+![Tactyqal architecture: one Next.js application, explicit server and database permissions, Supabase Auth/PostgreSQL/Storage, and a separate local WordPress import path](docs/assets/architecture.png)
 
-Open `docs/design/boards/index.html` in a browser. Alternatively, run `python3 -m http.server 8000 --bind 127.0.0.1` from the repository root and visit `http://localhost:8000/docs/design/boards/`. Do not expose this root-directory server publicly. The study has no application dependencies or backend; its static controls are explicitly labelled as specimens. Google Fonts are optional presentation resources, with local fallbacks if unavailable.
+[Open full-size diagram](docs/assets/architecture.png) · [Editable SVG source](docs/assets/architecture.svg) · [Detailed repository boundaries](docs/architecture/repository-structure.md)
 
-## Technical direction
+### Why this structure
 
-One Next.js App Router / TypeScript application, feature-based modules, Tailwind and selectively customised shadcn/ui, Supabase PostgreSQL/Auth/Storage, and Vercel deployment. Domain services are shared by server-rendered pages and documented Route Handlers. Database policies protect data independently of page navigation. Versions and package tooling are pinned in package.json and pnpm-lock.yaml.
+**One modular monolith, not unnecessary services.** Next.js owns rendering, routes, and the editor interface; domain logic lives in feature modules. A single application keeps deployment straightforward while allowing blog, authentication, and consultations to evolve independently.
 
-## Content and evidence
+**Thin routes, reusable services.** Public server pages and Route Handlers call the same domain services. Server pages do not make HTTP requests to their own API. SQL mutations that must be atomic are implemented as narrow database functions rather than multiple independent browser writes.
 
-The [audit](docs/research/brand-ux-audit.md) records public sources, observations, rights limitations, and decisions. Public-site screenshots are dated research evidence, not our implementation. Design-board projects/articles are synthetic and visibly labelled. Source attribution is not a licence to reuse student imagery. No private credentials or real inquiry records belong in Git.
+**Two permission boundaries.** Server code verifies the current Auth user and database-owned role. Supabase RLS independently protects rows. Public blog reads use a separate anonymous, cookie-free client and expose only currently published content. Proxy cookie refresh is not treated as authorisation.
 
-## Verification at this phase
+**Private requests, explicit public media.** Contacts and drafts are private. Cover bytes are intentionally public even when an article is a draft; the upload UI says so. Consultation submission uses one validated database capability, not unrestricted anonymous table insertion. Operational import privileges are separate from deployed request handling.
 
-Browser inspection of the existing site, documented non-submitting interaction checks, design-board desktop/mobile inspection, documentation-link checks, and diff review. Phase 4 verification includes lint/type/build checks, 17 unit/component tests, 131 database assertions, real importer/HTTP persistence tests, and the full browser suite including accessibility/reflow scans. See [current delivery status](docs/delivery/status.md) for exact results and limits.
+**Honest freshness and scale.** Published reads are dynamic/no-store, mutation paths are invalidated, list requests are bounded, and SQL indexes support key queries. This favours correctness for the challenge's workload without claiming a load-tested enterprise architecture or introducing speculative microservices.
+
+### Technology
+
+| Layer | Choice |
+|---|---|
+| Application | Next.js 16.4.5 App Router, React 19.3.1, TypeScript 6.0.3 |
+| Interface | Tailwind CSS 4.3.5, customised Radix-based primitives, locally bundled Newsreader/Manrope |
+| Data and identity | Supabase PostgreSQL 17, Auth, Storage, generated database types |
+| Validation and media | Zod, Sharp raster decoding/re-encoding |
+| Verification | Vitest, Testing Library, Playwright, Axe Core, pgTAP, persisted HTTP/import tests |
+| Deployment target | Vercel for Next.js; dedicated hosted Supabase for database/Auth/Storage |
+| Package tooling | pnpm 10.34.9 with a committed lockfile; tested on Node 24 |
+
+### Repository map
+
+```text
+src/
+├── app/                 Public/auth/admin routes and thin API adapters
+├── features/            Blog, auth, consultations, marketing, projects and media
+├── components/          Shared UI primitives and layout
+├── content/             Typed program and original project concepts
+├── lib/                 Supabase clients, HTTP contracts and environment validation
+└── types/               Generated database schema types
+supabase/
+├── migrations/          Schema, constraints, functions, policies and indexes
+├── tests/               Rolled-back database permission/integrity assertions
+└── seed.sql             Original synthetic categories/articles; no passwords
+scripts/                 Local setup, test fixtures and import operations
+tests/                   Browser journeys, persisted integration tests and fixtures
+docs/                    Research, architecture, design, deployment and evidence
+```
+
+## Evaluate the submission
+
+Use a dedicated **synthetic-data demo**. Judge access should be privately provisioned and revoked after evaluation.
+
+1. Review the homepage and both project stories on desktop and mobile.
+2. Open the Journal; type a query, filter a category, and open an article.
+3. Sign in with a privately supplied editor account.
+4. Create a post, save a draft, refresh, and open its saved preview. An incognito visitor must not see it.
+5. Upload a small cover, add alternative text, publish, and verify the public article and homepage.
+6. Edit, unpublish, and delete the post; confirm public visibility changes.
+7. Send a synthetic adult request at `/contact`; review, change status, and delete it in `/admin/inquiries`.
+8. Run the local import fixture twice to observe `inserted` then `skipped` and inspect retained provenance in protected preview.
+
+**A consultation receipt is not an appointment or email.** The demo does not contact the real Tactyqal team. Do not enter children’s personal information or real customer details.
+
+## Run locally
+
+### Requirements
+
+- Node **22–24**; Node 24 is the verified environment.
+- pnpm **10.34.9**.
+- A working Docker daemon and **Supabase CLI 3.0.0** for the local stack.
+- Installed Chrome or an authorised Playwright browser for browser tests.
+
+From a fresh checkout:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm db:start
+pnpm env:local
+pnpm editor:local
+pnpm dev
+```
+
+`db:start` starts local Supabase, excluding its privileged vector log shipper. On first startup it applies migrations and the synthetic seed; on an existing local database, use `pnpm db:migrate` for pending migrations. `env:local` creates an ignored `.env.local` with only local public connection values and refuses to overwrite existing configuration.
+
+`editor:local` generates a disposable confirmed editor and stores its credentials in ignored `.hoplite/runtime/local-editor.json` with private file permissions. It never prints the password and refuses hosted provisioning. Read this file only in your trusted local workspace—do not upload or commit it.
+
+Open `http://localhost:3000`. If development HMR is unreliable in the sandbox, use the verified production path instead:
+
+```bash
+pnpm build
+pnpm start
+```
+
+Do not run dev and production servers on the same port simultaneously. `pnpm db:reset` is **destructive local development tooling**, not a deployment command. No hosted reset is needed.
+
+### Environment variables
+
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
+NEXT_PUBLIC_SITE_URL=https://YOUR_PROJECT.vercel.app
+```
+
+For local development, `pnpm env:local` supplies local equivalents. `.env.example` contains names/placeholders only. The site URL must match the intended hosted canonical origin. Browser-safe keys do not replace RLS; never put service-role keys, database passwords, or access tokens in `NEXT_PUBLIC_*` variables.
+
+## Deploy to Vercel
+
+**Follow the [complete deployment runbook](docs/deployment/vercel.md)**—especially the hosted bucket, editor, and final smoke-test steps.
+
+1. Create a dedicated hosted Supabase demo and apply all migrations with the **remote** CLI target.
+2. Create the public `covers` bucket with raster MIME and size restrictions; local `config.toml` bucket creation does not deploy it.
+3. Disable hosted public signup, create a confirmed password user, and bootstrap its editor role from trusted SQL.
+4. Import this GitHub repository into Vercel as **Next.js**, root `./`, Node **24.x**, install `pnpm install --frozen-lockfile`, build `pnpm build`, default output directory.
+5. Set the three environment variables above. Once the Vercel domain is known, update the site origin and **redeploy**. Align the hosted Auth Site URL.
+6. Run the hosted smoke tests before sharing the URL or marking the submission deployed.
+
+**Hosted upload caveat:** the current server-upload flow is subject to Vercel’s **4.5 MB function payload limit**, below the local 5 MiB allowance. Use cover files **under 2 MB** for the hosted demo. Direct-to-Storage upload is not implemented; do not claim the full local upload allowance on Vercel.
+
+## Verification evidence
+
+The recorded results below are from the implementation/release checks against **local Supabase and the production-mode application**, not hosted CI or a deployed Vercel environment.
+
+| Command | Confirmed result |
+|---|---|
+| `pnpm check` | Lint, strict TypeScript, **17** unit/component tests passed |
+| `pnpm db:test` | **131** database permission/integrity assertions passed |
+| `pnpm test:import` | **4** importer tests passed with persistence enabled; none skipped |
+| `pnpm test:integration` | Real persisted HTTP CRUD passed |
+| `pnpm test:e2e` | **20** browser tests passed |
+| `pnpm build` | Production build passed |
+
+Tests cover draft privacy, authorisation, atomic writes, uploads, full publication lifecycle, consultation persistence/limits, failed-save recovery, search/pagination, sessions, and importer idempotency/rollback. The pgTAP runner uses the existing local Postgres container plus Perl `prove`, avoiding an unsupported helper-container security override.
+
+For browser tests, use an installed browser and an already running production app:
+
+```bash
+CHROME_EXECUTABLE_PATH=/path/to/chrome \
+PLAYWRIGHT_BASE_URL=http://127.0.0.1:3000 \
+pnpm test:e2e
+```
+
+Axe scans cover 12 sampled routes, plus mobile-menu and 200% text-reflow checks. **This is not WCAG certification.** A recorded local performance sample and its conditions are in the [release evidence](docs/delivery/chunk-12.md); it is not a hosted Lighthouse or field-performance claim. GitHub CI was not configured as part of these checks.
+
+## Trade-offs and remaining boundaries
+
+- This is an independent prototype, not an official brand launch. Content rights, commercial terms, mentor details and eligibility need business confirmation.
+- Public pages remain intentionally `noindex`. Hosted deployment and the walkthrough are not claimed until verified.
+- Login is administrator-provisioned password access, not public signup, email invitation acceptance or password recovery.
+- Request records remain until editor deletion or an explicit demo reset; no automatic retention service is invented. The small-demo rate limits require review before genuine public use.
+- Covers are public, and removing a reference does not promise automatic orphan-file cleanup. There is no scheduling, revision history, public comments, LMS, payment service or AI chatbot.
+- Slug changes remove the old address; the import retains original URLs but does not activate a production redirect map or migrate source media.
+
+## Further documentation
+
+- [Product brief and user journeys](docs/product/product-brief.md)
+- [Brand research and UX audit](docs/research/brand-ux-audit.md)
+- [Design specification](docs/design/design-specification.md)
+- [Repository architecture](docs/architecture/repository-structure.md)
+- [Database and role provisioning](docs/architecture/database.md)
+- [Authentication boundaries](docs/architecture/authentication.md)
+- [Blog API contract](docs/architecture/blog-api.md)
+- [Consultation privacy/idempotency/limits](docs/architecture/consultations.md)
+- [WordPress import design](docs/architecture/wordpress-import.md)
+- [Delivery status and verification history](docs/delivery/status.md)
