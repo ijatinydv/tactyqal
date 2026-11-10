@@ -58,6 +58,42 @@ The **local-only WordPress importer** defaults to a dry run. Explicit apply impo
 
 This does not crawl a live archive, download source media, recreate arbitrary WordPress layouts, or activate redirects. [Read the import design](docs/architecture/wordpress-import.md).
 
+## Blog migration
+
+The repository includes a live, idempotent migration script to import all published posts from the company's real WordPress blog (`https://www.tactyqal.com/blog`) directly into the Supabase database.
+
+### What the script does
+- **API pagination:** Fetches all published posts via the WordPress REST API (`per_page=50`, `_embed=1`), paginating through all available pages until the entire archive is retrieved.
+- **Resilient endpoints:** Queries the primary endpoint (`https://www.tactyqal.com/blog/wp-json/wp/v2/posts`) with automatic failover to the fallback route (`https://www.tactyqal.com/blog/?rest_route=/wp/v2/posts`) if the primary endpoint is blocked, rate-limited, or returns non-JSON responses.
+- **Rich content mapping:** Converts raw WordPress HTML into the structured `RichDocument` AST consumed by `ArticleContent`. Accurately preserves headings (H2/H3), paragraphs, bullet lists, ordered lists, blockquotes, and inline formatting (bold, italic, and safe links). Strips WordPress shortcodes, script tags, iframes, and unwanted styling.
+- **HTML entity decoding:** Cleans entities (e.g., `&#8217;`, `&amp;`, `&#8220;`, `&#8221;`, `&#8230;`) across titles, excerpts, and content bodies.
+- **Field & taxonomy preservation:** Preserves original slugs, UTC publication timestamps (`published_at`), category taxonomies (upserted to `categories` and linked via `post_categories`), author attributions, and featured image cover URLs (`_embedded['wp:featuredmedia']`).
+- **Immediate publication:** Imported articles are assigned `status: 'published'` with valid `published_at` timestamps, making them immediately visible on the public `/blog` and homepage.
+- **Strict idempotency:** Re-running the script updates existing records matched by source identity (`imported_source_provider` + `imported_source_id`) or `slug`, never producing duplicate records or unique constraint violations.
+
+### Running the import
+```bash
+# Run full live WordPress migration
+pnpm import:wp
+
+# Or with npm
+npm run import:wp
+
+# Optional test flags:
+pnpm import:wp --limit 10   # Import a subset of posts
+pnpm import:wp --dry-run    # Preview post parsing without DB writes
+```
+
+### Environment variables
+The script reads from your environment or `.env` file:
+- `NEXT_PUBLIC_SUPABASE_URL`: The URL of your Supabase project (e.g. `https://<ref>.supabase.co`).
+- `SUPABASE_SERVICE_ROLE_KEY`: Service role administrative key required to bypass RLS for administrative batch ingestion.
+
+### SEO & URL preservation
+The migration preserves exact WordPress article slugs (e.g. `/blog/<slug>`). This guarantees:
+1. **Zero ranking loss:** 301 redirects from the old WordPress site map 1:1 to identical `/blog/<slug>` paths on the Next.js site.
+2. **Canonical and structured data:** Open Graph `publishedTime`, canonical URLs, and `Article` Schema.org JSON-LD match original publication dates, featured images, and excerpts.
+
 ## Architecture
 
 ![Tactyqal architecture: one Next.js application, explicit server and database permissions, Supabase Auth/PostgreSQL/Storage, and a separate local WordPress import path](docs/assets/architecture.png)
