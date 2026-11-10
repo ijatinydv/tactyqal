@@ -1,8 +1,9 @@
+import { useId } from "react";
 import type { ProjectStory } from "@/content/projects";
 
 // give each illustrative project a distinct original visual without implying a finished product
 export function ProjectArtwork({ project, className = "" }: { project: ProjectStory; className?: string }) {
-  const titleId = `artwork-title-${project.slug}`;
+  const titleId = `artwork-title-${useId()}`;
 
   return (
     <figure className={`overflow-hidden bg-[#e9eee8] ${className}`}>

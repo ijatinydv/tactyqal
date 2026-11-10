@@ -36,6 +36,7 @@ export default async function AdminPostPreviewPage({ params }: { params: Promise
         </div>
         <Button asChild variant="secondary" className="mt-4 sm:mt-0"><Link href={`/admin/posts/${post.id}/edit`}>Back to editor</Link></Button>
       </div>
+      {post.imported_source_url && <aside className="mx-auto mb-7 max-w-3xl rounded-lg border border-border bg-white p-5" aria-label="Import provenance"><p className="eyebrow">Imported draft · review before publication</p><p className="mt-3 break-all text-sm text-muted">Source URL: {post.imported_source_url}</p><p className="mt-2 text-sm text-muted">Original author: {post.imported_author || "Not supplied"}</p><p className="mt-2 text-sm text-muted">Original publication: {post.imported_published_at ? new Date(post.imported_published_at).toISOString().slice(0, 10) : "Not supplied"}</p><p className="mt-3 text-xs text-muted">Source dates and attribution are retained as provenance, not a claim that this draft is already published. Review content rights and URL redirects before a production migration.</p></aside>}
       <article className="mx-auto max-w-3xl">
         <header className="mb-9 border-b border-border pb-7">
           <p className="eyebrow">{post.categories.map((category) => category.name).join(" · ") || "Journal"}</p>
