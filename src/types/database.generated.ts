@@ -79,14 +79,14 @@ isOneToOne: false
                   ]
                 },"posts": {
                   Row: {
-                    "author_id": string | null,"content": NonNullable<Json>,"cover_path": string | null,"created_at": string,"excerpt": string,"id": string,"published_at": string | null,"slug": string,"status": string,"title": string,"updated_at": string
+                    "author_id": string | null,"content": NonNullable<Json>,"cover_alt": string,"cover_path": string | null,"created_at": string,"excerpt": string,"id": string,"published_at": string | null,"slug": string,"status": string,"title": string,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "author_id"?: string | null,"content": NonNullable<Json>,"cover_path"?: string | null,"created_at"?: string,"excerpt": string,"id"?: string,"published_at"?: string | null,"slug": string,"status"?: string,"title": string,"updated_at"?: string
+                    "author_id"?: string | null,"content": NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt": string,"id"?: string,"published_at"?: string | null,"slug": string,"status"?: string,"title": string,"updated_at"?: string
                   }
                   Update: {
-                    "author_id"?: string | null,"content"?: NonNullable<Json>,"cover_path"?: string | null,"created_at"?: string,"excerpt"?: string,"id"?: string,"published_at"?: string | null,"slug"?: string,"status"?: string,"title"?: string,"updated_at"?: string
+                    "author_id"?: string | null,"content"?: NonNullable<Json>,"cover_alt"?: string,"cover_path"?: string | null,"created_at"?: string,"excerpt"?: string,"id"?: string,"published_at"?: string | null,"slug"?: string,"status"?: string,"title"?: string,"updated_at"?: string
                   }
                   Relationships: [
 
@@ -111,7 +111,9 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            [_ in never]: never
+            "blog_save_post":
+{ Args: { "p_category_ids": (string)[],"p_content": Json,"p_cover_alt": string,"p_cover_path": string,"p_excerpt": string,"p_post_id": string,"p_slug": string,"p_status": string,"p_title": string }; Returns: string
+                           }
           }
           Enums: {
             [_ in never]: never
