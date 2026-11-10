@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Button } from "./button";
@@ -11,7 +12,7 @@ import { Button } from "./button";
   });
   // keep navigation as a real link rather than an action disguised as a button
   it("supports a native link through its child slot", () => {
-    render(<Button asChild><a href="/projects">Projects</a></Button>);
+    render(<Button asChild><Link href="/projects">Projects</Link></Button>);
     expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute("href", "/projects");
   });
 });
