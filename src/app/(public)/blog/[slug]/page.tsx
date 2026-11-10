@@ -118,7 +118,7 @@ export default async function PublicArticlePage({
         ) : null}
         <h1 className="font-heading text-4xl leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted sm:text-xl">{post.excerpt}</p>
-        <p className="mt-4 text-xs text-muted">Demo editorial content · Independent redesign prototype</p>
+        <p className="mt-4 text-xs text-muted">Migrated from the Tactyqal blog · Independent redesign prototype</p>
         <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
           {publishedDate ? <time dateTime={post.published_at ?? undefined}>{publishedDate}</time> : null}
           {publishedDate && readingTime > 0 ? <span aria-hidden="true">·</span> : null}

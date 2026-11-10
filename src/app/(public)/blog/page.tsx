@@ -55,7 +55,7 @@ export default async function JournalPage({
           <p className="mb-8 mt-5 max-w-2xl text-lg leading-relaxed text-muted">
             Practical resources about finding a problem, building a first version, and learning from what happens next.
           </p>
-          <p className="mb-6 text-xs text-muted">Independent demo with original sample articles, not republished Tactyqal posts.</p>
+          <p className="mb-6 text-xs text-muted">Articles migrated from the existing Tactyqal blog.</p>
           <JournalErrorState />
         </div>
       </section>
@@ -76,7 +76,7 @@ export default async function JournalPage({
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
           Practical resources about finding a problem, building a first version, and learning from what happens next.
         </p>
-        <p className="mt-3 text-xs text-muted">Independent demo with original sample articles, not republished Tactyqal posts.</p>
+        <p className="mt-3 text-xs text-muted">Articles migrated from the existing Tactyqal blog.</p>
 
         <div className="mt-9">
           <JournalFilters categories={categories} query={query} selectedCategory={category} />
