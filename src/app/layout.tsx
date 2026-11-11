@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-// describe the independent submission without borrowing unverified commercial claims
+// keep the demo out of search engines unless an operator explicitly opts in via ALLOW_INDEXING
+const allowIndexing = process.env.ALLOW_INDEXING === "true";
+
 export const metadata: Metadata = {
-  title: { default: "Tactyqal — The Builder’s Studio", template: "%s | Tactyqal" },
-  description: "An independent redesign exploring personalised mentoring, useful projects, and practical resources for young builders.",
-  robots: { index: false, follow: false },
+  title: { default: "Tactyqal Labs — Your teen's idea, a launched app in 8 weeks", template: "%s | Tactyqal Labs" },
+  description: "1:1 mentoring that takes a young builder from idea to a working full-stack app in 8 weeks, using no-code tools.",
+  robots: { index: allowIndexing, follow: allowIndexing },
 };
 
 // supply document landmarks and a keyboard shortcut shared by every application shell

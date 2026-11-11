@@ -65,7 +65,7 @@ import { apiSessionCookie } from "../helpers/api-session";
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Send consultation request", exact: true }).click();
     await expect(page.getByText(/Request received/).first()).toBeVisible();
-    await expect(page.getByText(/not scheduled an appointment or sent an email/).first()).toBeVisible();
+    await expect(page.getByText(/respond within 24 hours/).first()).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.goto("/login");
     await page.getByLabel("Email address", { exact: true }).fill(editor.email);

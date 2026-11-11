@@ -8,7 +8,7 @@ import { createAuthFixture, localAuthAdmin } from "../helpers/local-auth";
   const violations: unknown[] = [];
   const editor = await createAuthFixture("editor");
   try {
-    for (const path of ["/", "/projects", "/projects/neighbourhood-library", "/blog", "/blog/start-with-one-useful-question", "/contact", "/privacy", "/login"]) {
+    for (const path of ["/", "/projects", "/projects/krishidrishti", "/blog", "/blog/start-with-one-useful-question", "/contact", "/privacy", "/login"]) {
       await page.goto(path);
       await page.waitForLoadState("networkidle");
       await page.evaluate(axe.source);

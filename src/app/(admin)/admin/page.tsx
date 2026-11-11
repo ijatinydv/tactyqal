@@ -23,7 +23,7 @@ export default async function AdminOverviewPage() {
         </section>
         <section className="rounded-xl border border-border bg-white p-5">
           <h2 className="font-heading text-2xl">Inquiries</h2>
-          <p className="mt-2 text-sm leading-6 text-muted">Review synthetic adult requests, update their status, or delete their stored contact details.</p>
+          <p className="mt-2 text-sm leading-6 text-muted">Review consultation requests, update their status, or delete their stored contact details.</p>
           <Button asChild variant="secondary" className="mt-4"><Link href="/admin/inquiries">Open inquiries</Link></Button>
         </section>
       </div>

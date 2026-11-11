@@ -1,107 +1,154 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LatestPosts } from "@/features/marketing/components/latest-posts";
-import { ProjectArtwork } from "@/features/marketing/components/project-artwork";
-import { programStages } from "@/content/program";
-import { projectStories } from "@/content/projects";
+import { HeroVideo } from "@/features/marketing/components/hero-video";
+import { StudentAppCard } from "@/features/marketing/components/student-app-card";
+import { ProgramTimeline } from "@/features/marketing/components/program-timeline";
+import { WhyGrid } from "@/features/marketing/components/why-grid";
+import { ToolsGrid } from "@/features/marketing/components/tools-grid";
+import { TestimonialsGrid } from "@/features/marketing/components/testimonials-grid";
+import { PricingCard } from "@/features/marketing/components/pricing-card";
+import { FaqAccordion } from "@/features/marketing/components/faq-accordion";
+import { Reveal } from "@/features/marketing/components/reveal";
+import { studentApps } from "@/content/students";
+import { heroStats } from "@/content/program";
+import { contactInfo } from "@/content/contact-info";
 
 // keep the latest published journal entries current without rebuilding the homepage
 export const dynamic = "force-dynamic";
 
-// explain the mentoring journey and its concept work without implying guaranteed results
 export default function HomePage() {
   return (
     <>
-      <section className="page-container grid items-center gap-9 py-9 sm:py-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:py-20">
-        <div className="max-w-2xl">
-          <p className="eyebrow">Tactyqal Builder’s Studio · mentoring for young builders</p>
-          <h1 className="display-heading mt-5">An idea is a good start.<br /><span className="text-brand">Build what comes next.</span></h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">A considered path from a real-world question to a first project. The current program outline describes eight weeks of one-to-one mentoring; the work begins with curiosity, not coding experience.</p>
+      {/* HERO */}
+      <section className="page-container grid items-center gap-10 py-10 sm:py-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:py-24">
+        <div className="max-w-xl">
+          <p className="eyebrow">Tactyqal Labs · 1:1 mentoring for young builders</p>
+          <h1 className="display-heading mt-5">Your teen&rsquo;s idea, a launched app in 8 weeks.</h1>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">1:1 mentoring that takes a young builder from idea to a working full-stack app, using no-code tools. No coding experience needed.</p>
           <div className="mt-7 flex flex-col items-stretch gap-3 min-[440px]:flex-row min-[440px]:items-center">
-            <Button asChild><Link href="/contact">Request a free consultation</Link></Button>
-            <Button variant="ghost" asChild><Link href="/projects">Explore project studies <span aria-hidden="true">→</span></Link></Button>
+            <Button asChild><Link href="/contact">Book a free consultation</Link></Button>
+            <Button variant="secondary" asChild><Link href="#stories">See student apps</Link></Button>
           </div>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted">The studies shown are original illustrative concepts—not student stories, completed products, or promised outcomes.</p>
-        </div>
-        <Link href={`/projects/${projectStories[0].slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
-          <ProjectArtwork project={projectStories[0]} className="shadow-[12px_12px_0_0_#dce5d8] sm:shadow-[20px_20px_0_0_#dce5d8]" />
-          <p className="mt-7 text-xs uppercase tracking-[0.16em] text-muted">A possible project · Neighbourhood Library</p>
-        </Link>
-      </section>
-
-      <section id="program" className="border-y border-border bg-[#f4f2ec] py-12 sm:py-18">
-        <div className="page-container">
-          <div className="grid gap-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-            <div><p className="eyebrow">The eight-week outline</p><h2 className="section-heading mt-4">A little structure.<br />Room to explore.</h2></div>
-            <p className="max-w-2xl leading-relaxed text-muted">The current Tactyqal website describes a one-to-one journey that moves from understanding a problem to sharing an early version. These are proposed stages, not a promise of a particular launch or result.</p>
-          </div>
-          <ol className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-            {programStages.map((stage, index) => (
-              <li key={stage.weeks} className="border-t border-border pt-4">
-                <p className="font-heading text-3xl text-brand">0{index + 1}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.12em] text-muted">Weeks {stage.weeks}</p>
-                <h3 className="mt-2 font-semibold text-ink">{stage.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{stage.description}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-8 border-t border-border pt-4 text-xs leading-relaxed text-muted">Source: the current Tactyqal program outline. Session format, admissions, fees, schedule, and availability require confirmation.</p>
-        </div>
-      </section>
-
-      <section className="page-container py-12 sm:py-20">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="eyebrow">A couple of starting points</p><h2 className="section-heading mt-4">Ordinary places.<br />Interesting questions.</h2></div>
-          <Link href="/projects" className="inline-flex min-h-11 items-center self-start font-semibold text-brand underline underline-offset-4 sm:self-auto">All project studies <span className="ml-2" aria-hidden="true">→</span></Link>
-        </div>
-        <div className="mt-8 grid gap-10 border-t border-border pt-7 md:grid-cols-2 md:gap-8">
-          {projectStories.map((project, index) => (
-            <article key={project.slug} className="grid items-start gap-5 sm:grid-cols-[1fr_1fr] sm:gap-6">
-              <Link href={`/projects/${project.slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
-                <ProjectArtwork project={project} />
-              </Link>
-              <div>
-                <p className="text-xs uppercase tracking-[0.12em] text-muted">Concept 0{index + 1}</p>
-                <h3 className="mt-2 font-heading text-2xl text-ink"><Link href={`/projects/${project.slug}`} className="hover:text-brand">{project.title}</Link></h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{project.summary}</p>
-                <Link href={`/projects/${project.slug}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-brand underline underline-offset-4">See the thinking →</Link>
+          <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-6">
+            {heroStats.map((stat) => (
+              <div key={stat.label}>
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="font-heading text-2xl text-brand sm:text-3xl">{stat.value}</dd>
+                <p className="mt-1 text-xs leading-snug text-muted">{stat.label}</p>
               </div>
-            </article>
-          ))}
+            ))}
+          </dl>
         </div>
-        <p className="mt-7 text-xs leading-relaxed text-muted">Both examples are illustrative concepts created for this prototype, not verified student achievements.</p>
+        <HeroVideo />
       </section>
 
-      <section className="border-y border-border bg-[#e9eee8] py-12 sm:py-18">
-        <div className="page-container grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:items-start">
-          <div><p className="eyebrow">A note for parents and guardians</p><h2 className="section-heading mt-4">Clear expectations matter.</h2></div>
-          <div className="max-w-2xl space-y-4 leading-relaxed text-muted">
-            <p>The outline is a starting point for a conversation, not a complete service agreement. Before making a decision, ask about the young person’s fit, how sessions work, safeguarding, scheduling, and what support is included.</p>
-            <p>Fees, availability, eligibility, and session arrangements have not been confirmed here. This prototype does not take payments, reserve places, or book appointments.</p>
-            <Link href="/contact" className="inline-flex min-h-11 items-center font-semibold text-brand underline underline-offset-4">Discuss the program and fit <span className="ml-2" aria-hidden="true">→</span></Link>
+      {/* STUDENT APPS */}
+      <section id="stories" className="border-y border-border bg-[#f4f2ec] py-14 sm:py-20">
+        <div className="page-container">
+          <Reveal>
+            <p className="eyebrow">Stories</p>
+            <h2 className="section-heading mt-4">Real students. Real apps.</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {studentApps.map((app, index) => (
+              <Reveal key={app.slug} delayMs={index * 60}>
+                <Link href={`/projects/${app.slug}`} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+                  <StudentAppCard app={app} />
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="faq" className="page-container py-12 sm:py-20">
-        <p className="eyebrow">Before you begin</p><h2 className="section-heading mt-4">Useful things to know.</h2>
-        <div className="mt-7 max-w-4xl">
-          <details className="border-t border-border py-5"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Do I need coding experience?</summary><p className="mt-3 max-w-3xl leading-relaxed text-muted">The current program is described as beginner-friendly and uses no-code tools. The right fit and tools for a particular idea would need to be discussed.</p></details>
-          <details className="border-t border-border py-5"><summary className="min-h-11 cursor-pointer py-2 font-semibold">What does the eight-week outline cover?</summary><p className="mt-3 max-w-3xl leading-relaxed text-muted">The published outline moves through problem discovery, prototyping, a first version, and sharing for feedback. It is a proposed curriculum, not a guarantee that a product will launch.</p></details>
-          <details className="border-t border-border py-5"><summary className="min-h-11 cursor-pointer py-2 font-semibold">What should parents or guardians confirm?</summary><p className="mt-3 max-w-3xl leading-relaxed text-muted">Ask about eligibility, safeguarding, session format, adult involvement, scheduling, and support between sessions. Those details are not confirmed on this prototype.</p></details>
-          <details className="border-t border-border py-5"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Where can I find fees and availability?</summary><p className="mt-3 max-w-3xl leading-relaxed text-muted">No confirmed fees or availability are published here. The prototype does not take payments or reserve a place, so please do not treat it as an offer or booking.</p></details>
-          <details className="border-y border-border py-5"><summary className="min-h-11 cursor-pointer py-2 font-semibold">Can I request a consultation here?</summary><p className="mt-3 max-w-3xl leading-relaxed text-muted">You can submit a synthetic adult consultation request to try the workflow. This independent demo stores the request privately; it does not book appointments, send email, or contact the real Tactyqal team.</p></details>
+      {/* THE 8-WEEK JOURNEY */}
+      <section id="program" className="page-container py-14 sm:py-20">
+        <Reveal>
+          <p className="eyebrow">The program</p>
+          <h2 className="section-heading mt-4">From idea to full app in 8 weeks.</h2>
+        </Reveal>
+        <div className="mt-10">
+          <ProgramTimeline />
         </div>
       </section>
 
+      {/* WHY PARENTS CHOOSE TACTYQAL LABS */}
+      <section className="border-y border-border bg-[#f4f2ec] py-14 sm:py-20">
+        <div className="page-container">
+          <Reveal>
+            <p className="eyebrow">Why parents choose Tactyqal Labs</p>
+            <h2 className="section-heading mt-4">A mentoring program built around real outcomes.</h2>
+          </Reveal>
+          <div className="mt-10">
+            <WhyGrid />
+          </div>
+        </div>
+      </section>
+
+      {/* FREE TOOLS */}
+      <section id="tools" className="page-container py-14 sm:py-20">
+        <Reveal>
+          <p className="eyebrow">Free tools to get started</p>
+          <h2 className="section-heading mt-4">Startup assessment tools used by 1000+ entrepreneurs.</h2>
+        </Reveal>
+        <div className="mt-10">
+          <ToolsGrid />
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="border-y border-border bg-[#f4f2ec] py-14 sm:py-20">
+        <div className="page-container">
+          <Reveal>
+            <p className="eyebrow">Testimonials</p>
+            <h2 className="section-heading mt-4">What our students say.</h2>
+          </Reveal>
+          <div className="mt-10">
+            <TestimonialsGrid />
+          </div>
+        </div>
+      </section>
+
+      {/* JOURNAL PREVIEW */}
       <LatestPosts />
 
-      <section className="page-container pb-12 sm:pb-20">
-        <div className="bg-[#245544] px-6 py-9 text-[#fffdf8] sm:px-10 sm:py-12">
-          <p className="text-xs uppercase tracking-[0.16em] text-[#dce5d8]">A first conversation, when the details are ready</p>
-          <div className="mt-4 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
-            <div className="w-full min-w-0"><h2 className="font-heading text-3xl leading-tight sm:text-4xl">Curiosity first.<br />The practical details next.</h2><p className="mt-4 max-w-2xl leading-relaxed text-[#e9eee8]">Talk through an idea and the support it might need. Try the request workflow using synthetic adult contact details only.</p></div>
-            <Button variant="secondary" className="max-w-full whitespace-normal border-white text-white hover:bg-white/10" asChild><Link href="/contact">Request a consultation <span aria-hidden="true">→</span></Link></Button>
+      {/* PRICING */}
+      <section id="pricing" className="page-container py-14 sm:py-20">
+        <Reveal className="text-center">
+          <p className="eyebrow">Pricing</p>
+          <h2 className="section-heading mt-4">One program. One clear price.</h2>
+        </Reveal>
+        <div className="mt-10">
+          <PricingCard />
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="border-t border-border page-container py-14 sm:py-20">
+        <p className="eyebrow">FAQ</p>
+        <h2 className="section-heading mt-4">Questions parents ask us.</h2>
+        <div className="mt-8">
+          <FaqAccordion />
+        </div>
+      </section>
+
+      {/* CONTACT CTA BAND */}
+      <section className="page-container pb-14 sm:pb-20">
+        <div className="bg-[#245544] px-6 py-10 text-[#fffdf8] sm:px-10 sm:py-14">
+          <p className="text-xs uppercase tracking-[0.16em] text-[#dce5d8]">Let&rsquo;s talk about your teen&rsquo;s idea</p>
+          <div className="mt-4 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <div className="w-full min-w-0">
+              <h2 className="font-heading text-3xl leading-tight sm:text-4xl">Book a free consultation today.</h2>
+              <p className="mt-4 max-w-2xl leading-relaxed text-[#e9eee8]">
+                {contactInfo.email} · {contactInfo.phone} · {contactInfo.hours}. {contactInfo.responseTime}
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 min-[440px]:flex-row">
+              <Button variant="secondary" className="max-w-full whitespace-normal border-white text-white hover:bg-white/10" asChild>
+                <Link href="/contact">Book a free consultation <span aria-hidden="true">→</span></Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

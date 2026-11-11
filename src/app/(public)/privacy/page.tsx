@@ -1,16 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { contactInfo } from "@/content/contact-info";
 
-// describe this demo rather than borrowing a policy for an unrelated production service
-export const metadata: Metadata = { title: "Demo privacy and data handling" };
+export const metadata: Metadata = { title: "Privacy" };
 
-// disclose the real stored fields access and retention before accepting adult consultation information
 export default function PrivacyPage() {
-  return <article className="page-container max-w-3xl py-14"><p className="eyebrow">Independent prototype · updated 10 November 2026</p><h1 className="section-heading mt-4">A small request.<br />Clear expectations.</h1><p className="mt-6 text-lg leading-relaxed text-muted">This is an independent hiring-challenge demonstration, not the official Tactyqal service. Please use synthetic contact information only.</p>
-    <section className="mt-9 border-t border-border pt-6"><h2 className="font-heading text-3xl">What this demo stores</h2><p className="mt-4 leading-relaxed text-muted">A consultation request contains an adult contact name, email, relationship, optional message, acknowledgement, timestamps, and review status. Technical receipt/idempotency and rate-limit metadata help prevent duplicates and abuse. Do not provide a child’s name, age, school, or private details.</p></section>
-    <section className="mt-9 border-t border-border pt-6"><h2 className="font-heading text-3xl">Who can see it</h2><p className="mt-4 leading-relaxed text-muted">Only authorised demo editors can read requests in the private inbox. Visitors receive a receipt, not access to stored requests. Supabase provides the database and invited-editor authentication; editor login uses session cookies. The form does not subscribe anyone to marketing or contact a calendar, email provider, or the real Tactyqal business.</p></section>
-    <section className="mt-9 border-t border-border pt-6"><h2 className="font-heading text-3xl">How long it stays</h2><p className="mt-4 leading-relaxed text-muted">Demo requests remain until an authorised editor deletes them or the disposable demo database is reset. There is no promised automatic retention period. Editors can delete requests from the inbox; this site does not offer an automated public deletion or email-support service. Limited technical abuse/idempotency records may remain according to the database policy and do not grant public access to contacts.</p></section>
-    <section className="mt-9 border-t border-border pt-6"><h2 className="font-heading text-3xl">Public editorial media</h2><p className="mt-4 leading-relaxed text-muted">Article cover images are public assets, even when their article is a draft. No confidential images should be uploaded. This demonstration does not claim privacy certification or replace a reviewed production privacy policy.</p></section>
-    <Link href="/contact" className="mt-9 inline-block text-brand underline">Back to consultation requests →</Link>
-  </article>;
+  return (
+    <article className="page-container max-w-3xl py-14">
+      <p className="eyebrow">Updated 11 November 2026</p>
+      <h1 className="section-heading mt-4">Privacy &amp; data handling</h1>
+      <p className="mt-6 text-lg leading-relaxed text-muted">
+        This page explains what information we collect through the consultation form, how it&rsquo;s used, and who can access it.
+      </p>
+      <section className="mt-9 border-t border-border pt-6">
+        <h2 className="font-heading text-3xl">What we collect</h2>
+        <p className="mt-4 leading-relaxed text-muted">
+          A consultation request includes the adult contact&rsquo;s name, email, relationship to the student, and an optional message. We do not ask for a child&rsquo;s name, age, school, or other personal details through this form.
+        </p>
+      </section>
+      <section className="mt-9 border-t border-border pt-6">
+        <h2 className="font-heading text-3xl">Who can see it</h2>
+        <p className="mt-4 leading-relaxed text-muted">
+          Requests are stored securely and are only visible to authorised Tactyqal team members for the purpose of following up with you. We don&rsquo;t sell or share your information with third parties.
+        </p>
+      </section>
+      <section className="mt-9 border-t border-border pt-6">
+        <h2 className="font-heading text-3xl">How long we keep it</h2>
+        <p className="mt-4 leading-relaxed text-muted">
+          Requests are kept for as long as needed to respond to your enquiry, and can be deleted by our team on request.
+        </p>
+      </section>
+      <section className="mt-9 border-t border-border pt-6">
+        <h2 className="font-heading text-3xl">Questions</h2>
+        <p className="mt-4 leading-relaxed text-muted">
+          Reach out any time at <a href={`mailto:${contactInfo.email}`} className="text-brand underline">{contactInfo.email}</a> or {contactInfo.phone}.
+        </p>
+      </section>
+      <Link href="/contact" className="mt-9 inline-block text-brand underline">Back to consultation requests →</Link>
+    </article>
+  );
 }

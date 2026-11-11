@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { projectStories } from "@/content/projects";
+import { studentApps } from "@/content/students";
 import { listPublishedPosts } from "@/features/blog/server";
 import { getCanonicalUrl, getPublicSiteUrl } from "@/features/blog/public-components/urls";
 
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   if (posts.length !== firstPage.total) throw new Error("Sitemap query returned an incomplete published archive.");
 
-  const publicRoutes: MetadataRoute.Sitemap = ["/", "/projects", ...projectStories.map(project => `/projects/${project.slug}`), "/blog", "/contact", "/privacy"].map((pathname) => ({
+  const publicRoutes: MetadataRoute.Sitemap = ["/", "/projects", ...studentApps.map(app => `/projects/${app.slug}`), "/blog", "/contact", "/privacy"].map((pathname) => ({
     url: getCanonicalUrl(pathname) ?? new URL(pathname, siteUrl).toString(),
   }));
   const articleRoutes: MetadataRoute.Sitemap = posts.map((post) => {

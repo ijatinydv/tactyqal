@@ -54,7 +54,7 @@ export function InquiryInbox() {
     finally { setPending(false); }
   }
 
-  return <section aria-labelledby="inbox-heading"><p className="eyebrow">Private adult contact requests</p><h1 id="inbox-heading" className="section-heading mt-3">A conversation starts here.</h1><p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">Synthetic demo requests only. Review and organise them here; this workspace does not send email or schedule appointments.</p>
+  return <section aria-labelledby="inbox-heading"><p className="eyebrow">Consultation requests</p><h1 id="inbox-heading" className="section-heading mt-3">A conversation starts here.</h1><p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">Review and organise consultation requests from the contact form.</p>
     <div className="mt-6 flex flex-wrap items-end gap-4"><label className="text-sm font-semibold">Filter by status<select aria-label="Filter by status" className="mt-2 block min-h-11 rounded-lg border border-control-border bg-white px-3" value={filter} onChange={event => { setFilter(event.target.value); setPage(1); setLoading(true); setSelectedId(""); }}><option value="">All requests</option><option value="new">New</option><option value="reviewed">Reviewed</option><option value="closed">Closed</option></select></label><p className="pb-3 text-sm text-muted">{loading ? "Loading requests…" : `${total} request${total === 1 ? "" : "s"}`}</p></div>
     {error && <div className="mt-5 space-y-3"><Alert tone="error">{error}</Alert><Button variant="secondary" onClick={() => { setLoading(true); setReload(value => value + 1); }}>Retry loading</Button></div>}
     {notice && <div className="mt-5"><Alert tone="success">{notice}</Alert></div>}
