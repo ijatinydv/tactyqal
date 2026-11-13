@@ -55,12 +55,6 @@ The visual system keeps the calm, editorial look of the previous build — warm 
 - Opaque consultation receipts, idempotent retries, and durable database limits: three accepted requests per email/hour and thirty globally/hour.
 - No service-role credential in normal application requests or browser bundles.
 
-### Migration demonstration
-
-The **local-only WordPress importer** defaults to a dry run. Explicit apply imports REST-shaped records as private drafts, retaining source URL, publication date, author attribution, slug, and categories. Repeated imports skip existing source identities without overwriting editorial changes; occupied manual slugs are reported as conflicts. HTML is converted through an inert allowlist, and each post/category operation is atomic.
-
-This does not crawl a live archive, download source media, recreate arbitrary WordPress layouts, or activate redirects. [Read the import design](docs/architecture/wordpress-import.md).
-
 ## Blog migration
 
 The repository includes a live, idempotent migration script to import all published posts from the company's real WordPress blog (`https://www.tactyqal.com/blog`) directly into the Supabase database.
@@ -411,5 +405,4 @@ These items need your confirmation before this goes live. Nothing below was inve
 - [Authentication boundaries](docs/architecture/authentication.md)
 - [Blog API contract](docs/architecture/blog-api.md)
 - [Consultation privacy/idempotency/limits](docs/architecture/consultations.md)
-- [WordPress import design](docs/architecture/wordpress-import.md)
 - [Delivery status and verification history](docs/delivery/status.md)
