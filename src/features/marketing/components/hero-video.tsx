@@ -28,7 +28,7 @@ export function HeroVideo() {
     <button
       type="button"
       onClick={() => setPlaying(true)}
-      className="group relative block aspect-video w-full overflow-hidden rounded-xl border border-border bg-gradient-to-br from-[#245544] to-[#1b4235] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+      className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-gradient-to-br from-[#245544] to-[#1b4235] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
       aria-label="Play video: student app impact"
     >
       <span className="absolute inset-0 flex items-center justify-center">

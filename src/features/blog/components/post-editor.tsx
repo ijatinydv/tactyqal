@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -355,25 +356,6 @@ export function PostEditor({ initialPost }: { initialPost?: Post }) {
 
           <aside className="space-y-5 rounded-xl border border-border bg-white p-4 sm:p-5">
             <div>
-              <h2 className="font-heading text-2xl">Categories</h2>
-              {categoryError && <div className="mt-3"><Alert tone="error"><div className="space-y-2"><p>{categoryError}</p><Button type="button" variant="secondary" onClick={() => { setCategoriesLoading(true); setCategoryError(""); setRequestVersion((value) => value + 1); }}>Retry categories</Button></div></Alert></div>}
-              {categoriesLoading && <p className="mt-2 text-sm text-muted" role="status">Loading categories…</p>}
-              {!categoriesLoading && !categoryError && categories.length === 0 && <p className="mt-2 text-sm text-muted">No categories are available yet.</p>}
-              <fieldset className="mt-3 space-y-2">
-                <legend className="sr-only">Post categories</legend>
-                {categories.map((category) => (
-                  <label key={category.id} className="flex min-h-11 items-center gap-3 text-sm">
-                    <input className="size-4 accent-brand" type="checkbox" checked={selectedCategories.includes(category.id)} onChange={(event) => {
-                      const next = event.target.checked ? [...selectedCategories, category.id] : selectedCategories.filter((id) => id !== category.id);
-                      changed(setSelectedCategories, next);
-                    }} />
-                    {category.name}
-                  </label>
-                ))}
-              </fieldset>
-            </div>
-
-            <div className="border-t border-border pt-4">
               <h2 className="font-heading text-2xl">Cover image</h2>
               <p id="cover-help" className="mt-2 text-xs leading-5 text-muted">JPEG, PNG, or WebP up to 5 MiB. Uploaded media is public even while its article is a draft; do not upload confidential images.</p>
               <label className="mt-3 block text-sm font-semibold" htmlFor="cover-file">Choose image
@@ -388,6 +370,33 @@ export function PostEditor({ initialPost }: { initialPost?: Post }) {
               <p id="alt-help" className="mt-1 text-xs leading-5 font-normal text-muted">Describe the image’s meaning, not its appearance alone.</p>
               {coverPath && <Button type="button" variant="ghost" className="mt-2 px-0" onClick={() => { setCoverPath(""); setCoverAlt(""); setCoverUrl(""); setRevision((value) => value + 1); }}>Remove cover</Button>}
             </div>
+
+            <details className="group border-t border-border pt-4" open={Boolean(initialPost?.categories.length)}>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-2">
+                <span className="font-heading text-2xl">Categories</span>
+                <span className="flex items-center gap-2 text-xs font-semibold text-muted">
+                  {selectedCategories.length > 0 && <span className="rounded-full bg-surface-muted px-2 py-1 text-brand">{selectedCategories.length} selected</span>}
+                  <ChevronDown size={18} className="transition-transform group-open:rotate-180" aria-hidden="true" />
+                </span>
+              </summary>
+              <div className="mt-3">
+                {categoryError && <div className="mt-3"><Alert tone="error"><div className="space-y-2"><p>{categoryError}</p><Button type="button" variant="secondary" onClick={() => { setCategoriesLoading(true); setCategoryError(""); setRequestVersion((value) => value + 1); }}>Retry categories</Button></div></Alert></div>}
+                {categoriesLoading && <p className="mt-2 text-sm text-muted" role="status">Loading categories…</p>}
+                {!categoriesLoading && !categoryError && categories.length === 0 && <p className="mt-2 text-sm text-muted">No categories are available yet.</p>}
+                <fieldset className="mt-3 space-y-2">
+                  <legend className="sr-only">Post categories</legend>
+                  {categories.map((category) => (
+                    <label key={category.id} className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
+                      <input className="size-4 cursor-pointer accent-brand" type="checkbox" checked={selectedCategories.includes(category.id)} onChange={(event) => {
+                        const next = event.target.checked ? [...selectedCategories, category.id] : selectedCategories.filter((id) => id !== category.id);
+                        changed(setSelectedCategories, next);
+                      }} />
+                      {category.name}
+                    </label>
+                  ))}
+                </fieldset>
+              </div>
+            </details>
           </aside>
         </div>
 
@@ -407,7 +416,7 @@ export function PostEditor({ initialPost }: { initialPost?: Post }) {
                 <legend className="sr-only">Article block {index + 1}</legend>
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <label className="text-xs font-semibold uppercase tracking-wide text-muted" htmlFor={`block-type-${index}`}>Block type
-                    <select id={`block-type-${index}`} className="ml-2 min-h-10 rounded-lg border border-control-border bg-white px-2 text-sm font-medium normal-case tracking-normal text-ink" value={block.kind} onChange={(event) => updateBlock(index, { kind: event.target.value as EditorBlock["kind"] })}>
+                    <select id={`block-type-${index}`} className="ml-2 min-h-10 cursor-pointer rounded-lg border border-control-border bg-white px-2 text-sm font-medium normal-case tracking-normal text-ink" value={block.kind} onChange={(event) => updateBlock(index, { kind: event.target.value as EditorBlock["kind"] })}>
                       <option value="paragraph">Paragraph</option>
                       <option value="heading2">Heading 2</option>
                       <option value="heading3">Heading 3</option>

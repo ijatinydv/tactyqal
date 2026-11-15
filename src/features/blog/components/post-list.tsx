@@ -92,7 +92,7 @@ export function PostList() {
         </label>
         <label className="block text-sm font-semibold">
           Publication status
-          <select className="mt-2 min-h-11 w-full rounded-lg border border-control-border bg-white px-3 py-2 text-base" value={status} onChange={(event) => { setLoading(true); setError(""); setStatus(event.target.value); setPage(1); }}>
+          <select className="mt-2 min-h-11 w-full cursor-pointer rounded-lg border border-control-border bg-white px-3 py-2 text-base" value={status} onChange={(event) => { setLoading(true); setError(""); setStatus(event.target.value); setPage(1); }}>
             <option value="">All posts</option>
             <option value="draft">Draft</option>
             <option value="published">Published</option>

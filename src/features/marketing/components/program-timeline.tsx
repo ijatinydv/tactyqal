@@ -35,7 +35,7 @@ export function ProgramTimeline() {
               tabIndex={active === index ? 0 : -1}
               onClick={() => setActive(index)}
               onKeyDown={(event) => onKeyDown(event, index)}
-              className={`min-h-11 w-full rounded-xl border p-4 text-left transition-colors ${active === index ? "border-brand bg-surface-muted" : "border-border bg-white hover:border-control-border"}`}
+              className={`min-h-11 w-full cursor-pointer rounded-xl border p-4 text-left transition-colors ${active === index ? "border-brand bg-surface-muted" : "border-border bg-white hover:border-control-border"}`}
             >
               <p className="font-heading text-2xl text-brand">0{index + 1}</p>
               <p className="mt-2 text-xs uppercase tracking-[0.12em] text-muted">Weeks {stage.weeks}</p>

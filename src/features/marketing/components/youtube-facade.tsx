@@ -24,7 +24,7 @@ export function YouTubeFacade({ title, embedUrl }: { title: string; embedUrl: st
     <button
       type="button"
       onClick={() => setLoaded(true)}
-      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg border border-control-border bg-ink text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+      className="group relative flex aspect-video w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-control-border bg-ink text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
       aria-label={`Play video: ${title}`}
     >
       <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-ink transition-transform group-hover:scale-105">
