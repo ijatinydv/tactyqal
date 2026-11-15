@@ -18,7 +18,7 @@ export default async function AdminOverviewPage() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <section className="rounded-xl border border-border bg-white p-5">
           <h2 className="font-heading text-2xl">Posts</h2>
-          <p className="mt-2 text-sm leading-6 text-muted">Create drafts, edit articles, and publish updates to the Journal.</p>
+          <p className="mt-2 text-sm leading-6 text-muted">Create drafts, edit articles, and publish updates to the Blog.</p>
           <Button asChild variant="secondary" className="mt-4"><Link href="/admin/posts">Manage posts</Link></Button>
         </section>
         <section className="rounded-xl border border-border bg-white p-5">

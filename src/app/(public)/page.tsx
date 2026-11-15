@@ -14,7 +14,7 @@ import { studentApps } from "@/content/students";
 import { heroStats } from "@/content/program";
 import { contactInfo } from "@/content/contact-info";
 
-// keep the latest published journal entries current without rebuilding the homepage
+// keep the latest published blog entries current without rebuilding the homepage
 export const dynamic = "force-dynamic";
 
 export default function HomePage() {
@@ -110,7 +110,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* JOURNAL PREVIEW */}
+      {/* BLOG PREVIEW */}
       <LatestPosts />
 
       {/* PRICING */}

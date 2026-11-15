@@ -13,7 +13,7 @@ Use this account to sign in to the editor workspace at `/admin`:
 
 ## What's Included
 
-- **Public website** — parent-first homepage (hero → student apps → program → testimonials → Journal → pricing → FAQ → contact), real student-apps gallery, database-backed blog with search/categories/pagination, consultation form.
+- **Public website** — parent-first homepage (hero → student apps → program → testimonials → Blog → pricing → FAQ → contact), real student-apps gallery, database-backed blog with search/categories/pagination, consultation form.
 - **Editor workspace** (`/admin`) — password-protected CRUD for posts (draft/publish/unpublish/delete), cover image upload, categories, and a consultation-request inbox.
 - **Backend** — PostgreSQL (Supabase) schema with RLS, validated REST API, rate-limited consultation endpoint, image validation/re-encoding on upload.
 - **WordPress migration script** — idempotent importer that pulls all published posts from `tactyqal.com/blog` into the database (`pnpm import:wp`), preserving slugs, dates, categories, and images.

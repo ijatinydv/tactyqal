@@ -22,7 +22,7 @@ export async function generateMetadata({
   try {
     post = await getPublishedPost(slug);
   } catch {
-    return { title: "Journal article unavailable", robots: { index: false, follow: false } };
+    return { title: "Blog article unavailable", robots: { index: false, follow: false } };
   }
 
   if (!post) return { title: "Article not found", robots: { index: false, follow: false } };
@@ -62,7 +62,7 @@ export default async function PublicArticlePage({
           <p className="eyebrow text-danger">Article unavailable</p>
           <h1 className="mt-3 font-heading text-3xl">We couldn’t load this article.</h1>
           <p className="mt-3 leading-relaxed text-muted">Please try again in a little while.</p>
-          <Link href="/blog" className="mt-6 inline-flex font-semibold text-brand underline underline-offset-4">Return to the Journal</Link>
+          <Link href="/blog" className="mt-6 inline-flex font-semibold text-brand underline underline-offset-4">Return to the Blog</Link>
         </div>
       </section>
     );
@@ -103,7 +103,7 @@ export default async function PublicArticlePage({
       <script type="application/ld+json">{text}</script>
       <div className="mx-auto max-w-3xl">
         <nav aria-label="Breadcrumb" className="mb-8 text-sm text-muted">
-          <Link href="/blog" className="font-semibold text-brand underline underline-offset-4">Journal</Link>
+          <Link href="/blog" className="font-semibold text-brand underline underline-offset-4">Blog</Link>
           <span aria-hidden="true" className="mx-2">/</span>
           <span>Article</span>
         </nav>
@@ -118,7 +118,7 @@ export default async function PublicArticlePage({
         ) : null}
         <h1 className="font-heading text-4xl leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
         <p className="mt-5 text-lg leading-relaxed text-muted sm:text-xl">{post.excerpt}</p>
-        <p className="mt-4 text-xs text-muted">From the Tactyqal Journal</p>
+        <p className="mt-4 text-xs text-muted">From the Tactyqal Blog</p>
         <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
           {publishedDate ? <time dateTime={post.published_at ?? undefined}>{publishedDate}</time> : null}
           {publishedDate && readingTime > 0 ? <span aria-hidden="true">·</span> : null}
@@ -139,7 +139,7 @@ export default async function PublicArticlePage({
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="eyebrow">Keep exploring</p>
-              <h2 id="related-heading" className="mt-2 font-heading text-3xl">More from the Journal</h2>
+              <h2 id="related-heading" className="mt-2 font-heading text-3xl">More from the Blog</h2>
             </div>
             <Link href="/blog" className="font-semibold text-brand underline underline-offset-4">All articles</Link>
           </div>

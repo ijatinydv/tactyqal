@@ -24,7 +24,7 @@ export const dynamic = "force-dynamic";
 
 // describe the public archive without overriding the prototype wide noindex policy
 export const metadata: Metadata = {
-  title: "Journal",
+  title: "Blog",
   description: "Practical notes on finding a problem, building a first version, and learning from what happens next.",
   alternates: { canonical: getCanonicalUrl("/blog") },
 };
@@ -83,7 +83,7 @@ export default async function JournalPage({
         </div>
 
         <div className="mb-5 mt-9 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="font-heading text-2xl">The Journal</h2>
+          <h2 className="font-heading text-2xl">The Blog</h2>
           <p aria-live="polite" className="text-sm text-muted">
             {result.total ? `Showing ${rangeStart}–${rangeEnd} of ${result.total} ${result.total === 1 ? "article" : "articles"}` : "0 articles"}
           </p>
